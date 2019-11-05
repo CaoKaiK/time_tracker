@@ -1,5 +1,12 @@
 # vscode
-/.vscode
+.vscode/
 
 #venv
-/venv
+venv/
+
+#cache
+__pycache__
+*.pyc
+
+#database
+*.sqlite3
