@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class Project(models.Model):
     project_name = models.CharField(max_length=20)
@@ -16,6 +15,7 @@ class Element(models.Model):
     def __str__(self):
         return self.element
 
+
 class Entry(models.Model):
     date = models.DateField('Date')
     start = models.DateTimeField('Start Time')
@@ -25,7 +25,7 @@ class Entry(models.Model):
     element = models.ForeignKey(Element, on_delete=models.SET_NULL, null=True, default=None)
 
     def __str__(self):
-        return self.date.strftime('%Y-%m-%d')
+        return self.date.strftime('%Y-%m-%d') # pylint: disable=maybe-no-member
 
 class Account(models.Model):
     date = models.DateField('Date')
