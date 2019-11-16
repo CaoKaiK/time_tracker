@@ -1,0 +1,32 @@
+body {
+  padding-top: 76px;
+  background: #f2eedf;
+  color: #333333;
+}
+
+header {
+  background: #9cbdc7;
+  color: #333333;
+}
+
+.bd-sidebar {
+  background: #f8f9fa;
+  padding-right: 0rem;
+  padding-left: 0rem;
+}
+
+.badge-light {
+  color: #363636
+}
+
+.icon {
+  fill: currentColor;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.bd-content {
+  padding-top: 15px;
+}
