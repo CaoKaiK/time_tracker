@@ -1,10 +1,15 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 
-from django.http import HttpResponse
+from .models import Project, Entry
 
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
 
 def home(request):
     return render(request, 'tracker/home.html')
+
+class ProjectListView(ListView):
+    model = Project
+    context_object_name = 'projects'
+
+class EntryListView(ListView):
+    model = Entry
