@@ -1,32 +1,39 @@
-body {
-  padding-top: 76px;
-  background: #f2eedf;
-  color: #333333;
+.background-light {
+  background-color: #eee;
 }
 
-header {
-  background: #9cbdc7;
-  color: #333333;
+.background-white {
+  background-color: white;
+}
+
+.logo-full {
+  height: 4rem;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.favicon {
+  height: 23px;
+  width: 23px;
+  min-width: 23px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
 }
 
 .bd-sidebar {
-  background: #f8f9fa;
+  background-color: #f8f9fa;
   padding-right: 0rem;
   padding-left: 0rem;
 }
 
-.badge-light {
-  color: #363636
-}
-
-.icon {
-  fill: currentColor;
-  width: 1.5em;
-  height: 1.5em;
-  vertical-align: middle;
-  overflow: hidden;
-}
-
-.bd-content {
-  padding-top: 15px;
+.custom-sticky {
+  top: 80px;
 }

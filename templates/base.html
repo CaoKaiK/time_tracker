@@ -18,10 +18,45 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
 
-<body>
+<body class="background-light" style="padding-top: 80px;">
+    <header class="navbar background-white fixed-top">
+        <a class="navbar-brand aria-label=" Siemens" style="padding-top: 0px;padding-bottom: 0px;"">
+        <img class=" logo-full" src="static/img/siemens-logo-claim.png">
+        </a>
+
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 bd-sidebar">
+                <div class="sticky-top custom-sticky">
+                        <nav class="nav flex-column">
+                                <a class="nav-link badge-light" href="#">
+                                    <span>Mapping </span>
+                                    
+                                </a>
+                                <a class="nav-link badge-light" href="#">
+                                    <span>Plotting </span>
+                                    
+                                </a>
+                                <a class="nav-link badge-light" href="#">
+                                    <span>Test </span>
+                                    
+                                </a>
+                            </nav>
+                </div>
+            </div>
+            <div class="col-9">
+                    {% block content %} {% endblock %}
+            </div>
+        </div>
+    </div>
+
+
 
 </body>
 
