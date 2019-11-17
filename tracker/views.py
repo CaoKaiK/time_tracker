@@ -18,10 +18,14 @@ class ProjectListView(ListView):
 class ProjectDetailView(DetailView):
     model = Project
 
-class ProjectCreateView(CreateView, SuccessMessageMixin):
+class ProjectCreateView(SuccessMessageMixin, CreateView):
     model = Project
-    fields = ['project_name']
-    success_message = "Project %(name)s was created" #TO DO
+    fields = [
+        'project_name',
+        'country_name',
+        ]
+
+    success_message = "Project %(project_name)s was created"
 
     def get_success_url(self):
         return reverse('projects-detail', kwargs={'pk': self.object.pk})

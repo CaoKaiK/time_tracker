@@ -3,6 +3,7 @@ from django.db import models
 
 class Project(models.Model):
     project_name = models.CharField(max_length=20)
+    country_name = models.CharField(max_length=30)
     active = models.BooleanField(default=True)
 
     def __str__(self):
