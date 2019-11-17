@@ -25,9 +25,8 @@
 <body class="background-light" style="padding-top: 80px;">
     <header class="navbar background-white fixed-top">
         <a class="navbar-brand aria-label=" Siemens" style="padding-top: 0px;padding-bottom: 0px;"">
-        <img class=" logo-full" src="static/img/siemens-logo-claim.png">
+            <img class=" logo-full" src="static/img/siemens-logo-claim.png">
         </a>
-
     </header>
 
     <div class="container-fluid">
@@ -35,15 +34,20 @@
             <div class="col-md-3 col-lg-2 bd-sidebar">
                 <div class="sticky-top custom-sticky">
                         <nav class="nav flex-column">
-                                <a class="nav-link badge-light" href="#">
+                                <a class="nav-link {% if request.resolver_match.url_name == "entries" %} badge-info {% else %} badge-light {% endif %}" href="{% url 'entries'%}">
                                     <span>Time Entries </span>
                                     
                                 </a>
-                                <a class="nav-link badge-light" href="#">
+                                <a class="nav-link {% if request.resolver_match.url_name == "projects" %} badge-info {% else %} badge-light {% endif %}" href="{% url 'projects'%}">
+                                    <span>Projects </span>
+                                    
+                                </a>
+
+                                <a class="nav-link {% if request.resolver_match.url_name == "dashboard" %} badge-info {% else %} badge-light {% endif %}" href="#">
                                     <span>Dashboard </span>
                                     
                                 </a>
-                                <a class="nav-link badge-light" href="#">
+                                <a class="nav-link {% if request.resolver_match.url_name == "reports" %} badge-info {% else %} badge-light {% endif %}" href="#">
                                     <span>Reports </span>
                                     
                                 </a>
