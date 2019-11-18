@@ -19,6 +19,11 @@ class ProjectListView(ListView):
 class ProjectDetailView(DetailView):
     model = Project
 
+    def get_context_data(self, **kwargs):
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+        context['elements'] = Element.objects.all()
+        return context
+
 class ProjectCreateView(SuccessMessageMixin, CreateView):
     model = Project
     fields = [

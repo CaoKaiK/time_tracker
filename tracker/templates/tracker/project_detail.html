@@ -9,6 +9,9 @@
         <h6 class="card-subtitle mb-2 text-muted">{{ object.country_name }}</h6>
         <p class="card-text">Element</p>
         <a href="{% url 'projects-element-create' pk=project.id %}" class="badge badge-success">Add WBS</a>
+        {% for element in elements %}
+            <a href="{% url 'projects-element-create' pk=project.id %}" class="badge badge-success">{{ element.element }}</a>
+        {% endfor%}
     </div>
 </div>
 
