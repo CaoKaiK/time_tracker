@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
+from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from django.contrib.messages.views import SuccessMessageMixin
@@ -13,7 +14,6 @@ def home(request):
 class ProjectListView(ListView):
     model = Project
     context_object_name = 'projects'
-    paginate_by = 20
 
 class ProjectDetailView(DetailView):
     model = Project
@@ -38,9 +38,14 @@ class ProjectUpdateView(SuccessMessageMixin, UpdateView):
     def get_success_url(self):
         return reverse('projects-detail', kwargs={'pk': self.object.pk})
 
-class ProjectDeleteView(SuccessMessageMixin, DeleteView):
+class ProjectDeleteView(DeleteView):
     model = Project
     success_url = reverse_lazy('projects-list')
+    success_message = "Project was deleted"
+
+    def delete(self, request, *args, **kwargs):
+        messages.warning(self.request, self.success_message)
+        return super(ProjectDeleteView, self).delete(request, *args, **kwargs)
 
 
 class EntryListView(ListView):

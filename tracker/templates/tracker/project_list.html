@@ -1,13 +1,34 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
+
+<div class="card card-sm" >
+    <div class="card-body">
+            <a href="{% url 'projects-create' %}" class="card-title-link">
+                    <h5 class="card-title">New Project</h5>
+                </a>
+    </div>
+    <object data="{% static 'svg/plus.svg' %}" class="card-img-top" type="image/svg+xml" width="60" height="60"></object>
+</div>
+
+
 
 {% for project in projects %}
 
-    <div class="card">
-        <div class="card-body">
-                {{ project.project_name }}
-        </div>        
+<div class="card card-sm">
+    <div class="card-body">
+        <a href="{% url 'projects-detail' pk=project.id %}" class="card-title-link">
+            <h5 class="card-title">{{ project.project_name }}</h5>
+        </a>
+        <h6 class="card-subtitle mb-2 text-muted">{{ project.country_name }}</h6>
+        <p class="card-text">Element</p>
+        <a href="{% url 'projects-update' pk=project.id %}" class="badge badge-success">Add WBS</a>
+        <a href="{% url 'projects-update' pk=project.id %}" class="badge badge-warning">Edit</a>
+        <a href="{% url 'projects-delete' pk=project.id %}" class="badge badge-danger">Delete</a>
     </div>
+</div>
+
 {% endfor %}
 {% endblock content %}

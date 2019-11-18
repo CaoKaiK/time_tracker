@@ -37,3 +37,17 @@
 .custom-sticky {
   top: 80px;
 }
+
+.content {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+.card-sm {
+  width: 18rem;
+}
+
+.card-title-link {
+  color: #212529;
+}
