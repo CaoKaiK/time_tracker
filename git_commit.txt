@@ -1,0 +1,11 @@
+INIT
+IMPLEMENT implement new function
+CHANGE change existing function
+EXTEND extend existing function
+BUGFIX
+REVIEW refactor, analyse
+RELEASE
+REVERT
+BRANCH
+MERGE
+CLOSE
