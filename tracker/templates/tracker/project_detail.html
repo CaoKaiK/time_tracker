@@ -2,9 +2,13 @@
 
 {% block content %}
 
-<div class="card">
+
+<div class="card card-sm">
     <div class="card-body">
-        {{ object.project_name }}
+        <h5 class="card-title"> {{ object.project_name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ object.country_name }}</h6>
+        <p class="card-text">Element</p>
+        <a href="{% url 'projects-element-create' pk=project.id %}" class="badge badge-success">Add WBS</a>
     </div>
 </div>
 

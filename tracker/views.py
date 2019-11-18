@@ -5,7 +5,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from django.contrib.messages.views import SuccessMessageMixin
 
-from .models import Project, Entry
+
+from .models import Project, Element, Entry
 
 
 def home(request):
@@ -46,6 +47,20 @@ class ProjectDeleteView(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.warning(self.request, self.success_message)
         return super(ProjectDeleteView, self).delete(request, *args, **kwargs)
+
+class ElementCreateView(CreateView):
+    model = Element
+    fields = [
+        'element',
+        'act_description',
+        'act_type',
+        'act',
+    ]
+
+    def form_valid(self, form):
+        form.instance.project_id_id = self.kwargs.get('pk')
+        return super(ElementCreateView, self).form_valid(form)
+
 
 
 class EntryListView(ListView):

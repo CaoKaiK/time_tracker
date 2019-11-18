@@ -6,6 +6,7 @@ from .views import (
     ProjectCreateView,
     ProjectUpdateView,
     ProjectDeleteView,
+    ElementCreateView,
     EntryListView)
 from . import views
 
@@ -16,5 +17,6 @@ urlpatterns = [
     path('projects/create/', ProjectCreateView.as_view(), name="projects-create"),
     path('projects/<int:pk>/update/', ProjectUpdateView.as_view(), name='projects-update'),
     path('projects/<int:pk>/delete/', ProjectDeleteView.as_view(), name="projects-delete"),
+    path('projects/<int:pk>/element/create', ElementCreateView.as_view(), name='projects-element-create'),
     path('entries/', EntryListView.as_view(), name='entries'),
 ]
