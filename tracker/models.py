@@ -12,7 +12,7 @@ class Project(models.Model):
 class Element(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
     element = models.CharField(max_length=24)
-    act_description = models.CharField(max_length=20, blank=True)
+    act_description = models.CharField(max_length=20, help_text="Describe the general activity for this WBS")
     act_type = models.CharField('Activity Type', max_length=6, blank=True)
     act = models.IntegerField('Activity', blank=True, null=True)
      
