@@ -48,7 +48,7 @@ class ProjectDeleteView(DeleteView):
         messages.warning(self.request, self.success_message)
         return super(ProjectDeleteView, self).delete(request, *args, **kwargs)
 
-class ElementCreateView(CreateView):
+class ElementCreateView(SuccessMessageMixin, CreateView):
     model = Element
     fields = [
         'element',
@@ -56,10 +56,14 @@ class ElementCreateView(CreateView):
         'act_type',
         'act',
     ]
-
     def form_valid(self, form):
-        form.instance.project_id_id = self.kwargs.get('pk')
+        form.instance.project_id = self.kwargs.get('pk')
         return super(ElementCreateView, self).form_valid(form)
+
+    success_message = "Element %(element)s was created"
+    def get_success_url(self):
+        return reverse('projects-detail', kwargs={'pk': self.object.project_id})
+
 
 
 
