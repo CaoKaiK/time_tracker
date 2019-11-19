@@ -22,7 +22,7 @@ class ProjectDetailView(DetailView):
     
     def get_context_data(self, *args, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(*args, **kwargs)
-        context['elements'] = Element.objects.filter(project_id = self.object.id)
+        context['elements'] = Element.objects.filter(project_id = self.object.id) # pylint: disable=maybe-no-member
         return context
 
 class ProjectCreateView(SuccessMessageMixin, CreateView):
@@ -30,6 +30,9 @@ class ProjectCreateView(SuccessMessageMixin, CreateView):
     fields = [
         'project_name',
         'country_name',
+        'customer_name',
+        'customer_street',
+        'customer_postal',
         ]
     success_message = "Project %(project_name)s was created"
     def get_success_url(self):
@@ -40,6 +43,10 @@ class ProjectUpdateView(SuccessMessageMixin, UpdateView):
     fields = [
         'project_name',
         'country_name',
+        'customer_name',
+        'customer_street',
+        'customer_postal',
+        'active',
     ]
     success_message = "Project %(project_name)s was updated"
     def get_success_url(self):
