@@ -14,14 +14,15 @@ def home(request):
 
 class ProjectListView(ListView):
     model = Project
-    context_object_name = 'projects'
 
+
+        
 class ProjectDetailView(DetailView):
     model = Project
-
-    def get_context_data(self, **kwargs):
-        context = super(ProjectDetailView, self).get_context_data(**kwargs)
-        context['elements'] = Element.objects.all()
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProjectDetailView, self).get_context_data(*args, **kwargs)
+        context['elements'] = Element.objects.filter(project_id = self.object.id)
         return context
 
 class ProjectCreateView(SuccessMessageMixin, CreateView):

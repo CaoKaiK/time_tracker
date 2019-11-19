@@ -15,7 +15,7 @@
 
 
 
-{% for project in projects %}
+{% for project in object_list %}
 
 <div class="card card-sm">
     <div class="card-body">
@@ -24,6 +24,9 @@
         </a>
         <h6 class="card-subtitle mb-2 text-muted">{{ project.country_name }}</h6>
         <p class="card-text">Element</p>
+        {% for element in project.get_subfeature_elements %}
+        <a href="{% url 'projects-element-create' pk=project.id %}" class="badge badge-success">{{ element.element }}</a>
+        {% endfor%}
         <a href="{% url 'projects-update' pk=project.id %}" class="badge badge-success">Add WBS</a>
         <a href="{% url 'projects-update' pk=project.id %}" class="badge badge-warning">Edit</a>
         <a href="{% url 'projects-delete' pk=project.id %}" class="badge badge-danger">Delete</a>

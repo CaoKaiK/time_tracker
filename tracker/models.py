@@ -6,6 +6,9 @@ class Project(models.Model):
     country_name = models.CharField(max_length=30)
     active = models.BooleanField(default=True)
 
+    def get_subfeature_elements(self):
+        return self.element_set.filter(project_id = self.id)
+
     def __str__(self):
         return self.project_name
 
