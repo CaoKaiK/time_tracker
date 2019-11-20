@@ -84,3 +84,20 @@ class ElementCreateView(SuccessMessageMixin, CreateView):
 
 class EntryListView(ListView):
     model = Entry
+
+
+
+class EntryDetailView(DetailView):
+    model = Entry
+
+class EntryCreateView(CreateView):
+    model = Entry
+    fields = [
+        'element',
+        'date',
+        'start',
+        'end',
+        'duration',
+        'desciption',        
+    ]
+

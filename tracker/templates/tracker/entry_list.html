@@ -1,5 +1,37 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">WBS-Element</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in object_list %}
+        <tr>
+            <th scope="row">{{entry.id}}</th>
+            <td>{{entry.date | date:"Y-m-d"}}</td>
+            <td>{{entry.element_id}}</td>
+            <td>{{entry.start | date:"H:i"}}</td>
+            <td>{{entry.end | date:"H:i"}}</td>
+            <td>{{entry.duration}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
 
 {% endblock content %}

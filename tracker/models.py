@@ -27,6 +27,7 @@ class Element(models.Model):
     act_type = models.CharField('Activity Type', max_length=6, help_text="Activity Type for this WBS/PSP")
     act = models.IntegerField('Activity', help_text="Activity Type for this WBS/PSP")
     
+
     def __str__(self):
         return self.element
 
