@@ -82,7 +82,5 @@ class ElementCreateView(SuccessMessageMixin, CreateView):
         return reverse('projects-detail', kwargs={'pk': self.object.project_id})
 
 
-
-
 class EntryListView(ListView):
     model = Entry

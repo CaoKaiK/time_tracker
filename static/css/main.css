@@ -34,6 +34,17 @@
   padding-left: 0rem;
 }
 
+@media (min-width: 768px) {
+  .bd-sidebar {
+    background-color: #f8f9fa;
+    padding-right: 0rem;
+    padding-left: 0rem;
+    height: 100vh;
+  }
+}
+
+
+
 .custom-sticky {
   top: 80px;
 }
