@@ -33,6 +33,7 @@ class ProjectCreateView(SuccessMessageMixin, CreateView):
         'customer_name',
         'customer_street',
         'customer_postal',
+        'customer_city',
         ]
     template_name_suffix ='_create_form'
     
@@ -48,6 +49,7 @@ class ProjectUpdateView(SuccessMessageMixin, UpdateView):
         'customer_name',
         'customer_street',
         'customer_postal',
+        'customer_city',
         'active',
     ]
     success_message = "Project %(project_name)s was updated"
