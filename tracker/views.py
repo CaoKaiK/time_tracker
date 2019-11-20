@@ -34,6 +34,8 @@ class ProjectCreateView(SuccessMessageMixin, CreateView):
         'customer_street',
         'customer_postal',
         ]
+    template_name_suffix ='_create_form'
+    
     success_message = "Project %(project_name)s was created"
     def get_success_url(self):
         return reverse('projects-detail', kwargs={'pk': self.object.pk})

@@ -7,10 +7,12 @@ class Project(models.Model):
     customer_name = models.CharField(max_length=30, blank=True, null=True, help_text="Customer Name")
     customer_street = models.CharField(max_length=50, blank=True, null=True, help_text="Customer Address Street")
     customer_postal = models.CharField(max_length=15, blank=True, null=True, help_text="Customer Postal Code")
-
-    
+    customer_city = models.CharField(max_length=30, blank=True, null=True, help_text="Customer City")
 
     active = models.BooleanField(default=True, help_text="Project is still active")
+
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
 
     def get_subfeature_elements(self):
         return self.element_set.filter(project_id = self.id) # pylint: disable=maybe-no-member

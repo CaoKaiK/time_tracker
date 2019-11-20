@@ -3,15 +3,63 @@
 {% block content %}
 
 
-<div class="card card-sm">
+<div class="card mb-3">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a href="#" class="nav-link active">Project</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'projects-update' pk=project.id %}" class="nav-link">Edit</a>
+            </li>
+        </ul>
+    </div>
     <div class="card-body">
-        <h5 class="card-title"> {{ object.project_name }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ object.country_name }}</h6>
-        <p class="card-text">Element</p>
-        <a href="{% url 'projects-element-create' pk=project.id %}" class="badge badge-success">Add WBS</a>
-        {% for element in elements %}
-            <a href="{% url 'projects-element-create' pk=project.id %}" class="badge badge-success">{{ element.element }}</a>
-        {% endfor%}
+        <div class="container-fluid no-pad" >
+            <div class="row">
+                <div class="col-md-8">
+                        <h5 class="card-title"> {{ object.project_name }} 
+                            {% if object.active == True %}
+                                <span class="badge badge-success">Active</span>
+                            {% else %}
+                                <span class="badge badge-danger">Inactive</span>
+                            {% endif %}
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ object.country_name }}</h6>
+                        <hr>
+                        <h6 class="card-subtitle mb-2 text-muted">Created on:</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ object.created_date | date:"Y-m-d H:i"}}</h6>
+                        <br>
+                        <h6 class="card-subtitle mb-2 text-muted">Modified on:</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ object.modified_date | date:"Y-m-d H:i"}}</h6>
+                </div>
+                <div class="col-md-4">
+                    <div  class="card border-dark mb-3">
+                        <div class="card-header">Customer</div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object.customer_name}}</h5>
+                            <p class="card-text">                                
+                                {{ object.customer_street}}<br>
+                                {{ object.customer_postal}}<br>
+                                {{ object.customer_city}}, {{ object.country_name }}
+                            </p>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+        <h5 class="card-title">Elements:</h5>
+        <ul class="list-group">
+            <a href="{% url 'projects-element-create' pk=project.id %}" class="list-group-item list-group-item-action">Add WBS</a>
+            {% for element in elements %}
+            <li class="list-group-item">{{ element.element }}</li>
+            {% endfor%}
+        </ul>
+        
+       
     </div>
 </div>
 

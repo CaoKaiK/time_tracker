@@ -44,9 +44,16 @@
   padding-top: 10px;
 }
 
+.no-pad {
+  padding-left: 0px; 
+  padding-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
 .card-sm {
   width: 18rem;
 }
+
 
 .card-title-link {
   color: #212529;
