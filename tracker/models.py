@@ -26,7 +26,11 @@ class Element(models.Model):
     act_description = models.CharField(max_length=20, help_text="Describes the general activity for this WBS/PSP")
     act_type = models.CharField('Activity Type', max_length=6, help_text="Activity Type for this WBS/PSP")
     act = models.IntegerField('Activity', help_text="Activity Type for this WBS/PSP")
+
+    active = models.BooleanField(default=True, help_text="WBS is still active")
     
+    def get_subfeature_entries(self):
+        return self.entry_set.filter(element_id = self.id) # pylint: disable=maybe-no-member
 
     def __str__(self):
         return self.element

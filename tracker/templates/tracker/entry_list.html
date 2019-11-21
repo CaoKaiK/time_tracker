@@ -4,32 +4,52 @@
 
 {% block content %}
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Date</th>
-            <th scope="col">WBS-Element</th>
-            <th scope="col">Start</th>
-            <th scope="col">End</th>
-            <th scope="col">Duration</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for entry in object_list %}
-        <tr>
-            <th scope="row">{{entry.id}}</th>
-            <td>{{entry.date | date:"Y-m-d"}}</td>
-            <td>{{entry.element_id}}</td>
-            <td>{{entry.start | date:"H:i"}}</td>
-            <td>{{entry.end | date:"H:i"}}</td>
-            <td>{{entry.duration}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="card shadow-sm mb-3">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a href="#" class="nav-link active">View Entries</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Edit Type 1</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Edit Type 2</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
 
-
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Project</th>
+                    <th scope="col">WBS-Element</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Start</th>
+                    <th scope="col">End</th>
+                    <th scope="col">Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in object_list %}
+                <tr>
+                    <th scope="row">{{entry.id}}</th>
+                    <td>{{entry.date | date:"Y-m-d"}}</td>
+                    <td>{{entry.element.project.project_name}}</td>
+                    <td>{{entry.element.element}}</td>
+                    <td>{{entry.description}}</td>
+                    <td>{{entry.start | date:"H:i"}}</td>
+                    <td>{{entry.end | date:"H:i"}}</td>
+                    <td>{{entry.duration}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
 

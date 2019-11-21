@@ -14,8 +14,6 @@ def home(request):
 
 class ProjectListView(ListView):
     model = Project
-
-
         
 class ProjectDetailView(DetailView):
     model = Project
@@ -64,6 +62,17 @@ class ProjectDeleteView(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.warning(self.request, self.success_message)
         return super(ProjectDeleteView, self).delete(request, *args, **kwargs)
+
+
+
+
+class ElementDetailView(DetailView):
+    model = Element
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ElementDetailView, self).get_context_data(*args, **kwargs)
+        context['entrys'] = Entry.objects.filter(element_id = self.object.id) # pylint: disable=maybe-no-member
+        return context
 
 class ElementCreateView(SuccessMessageMixin, CreateView):
     model = Element

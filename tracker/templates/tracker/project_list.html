@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="card card-sm mb-3">
+<div class="card shadow-sm card-sm mb-3">
     <div class="card-body">
         <a href="{% url 'projects-create' %}" class="card-title-link">
             <h5 class="card-title">New Project</h5>
@@ -16,7 +16,7 @@
 
 {% for project in object_list %}
 
-<div class="card card-sm mb-3">
+<div class="card shadow-sm card-sm mb-3">
     <div class="card-body">
         <a href="{% url 'projects-detail' pk=project.id %}" class="card-title-link">
             <h5 class="card-title">{{ project.project_name }}</h5>
