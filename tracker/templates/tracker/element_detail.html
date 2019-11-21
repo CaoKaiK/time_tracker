@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-sm mb-3">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a href="#" class="nav-link active">WBS</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Edit</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="container-fluid no-pad">
+            <div class="row">
+                <div class="col-md-8">
+                    <h5 class="card-title"> {{ object.element }}   
+                        {% if object.active == True %}
+                        <span class="badge badge-success">Active</span>
+                        {% else %}
+                        <span class="badge badge-danger">Inactive</span>
+                        {% endif %}
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ object.project.project_name }}</h6>
+                    <hr>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-dark mb-3">
+                        <div class="card-header">Settings</div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object.act_description }}</h5>
+                            <p class="card-text">
+                                TG: {{ object.act }}<br>
+                                Activity Type: {{ object.act_type }}<br>
+                                Cost center:
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <h5 class="card-title">Entries:</h5>
+
+
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Element</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Start</th>
+                    <th scope="col">End</th>
+                    <th scope="col">Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                <tr>
+                    <th scope="row">{{ entry.element.element }}</th>
+                    <td>{{ entry.date }}</td>                    
+                    <td>{{ entry.description }}</td>
+                    <td>{{ entry.start }}</td>
+                    <td>{{ entry.end }}</td>
+                    <td>{{ entry.duration}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

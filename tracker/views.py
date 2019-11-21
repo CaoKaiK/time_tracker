@@ -71,7 +71,7 @@ class ElementDetailView(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ElementDetailView, self).get_context_data(*args, **kwargs)
-        context['entrys'] = Entry.objects.filter(element_id = self.object.id) # pylint: disable=maybe-no-member
+        context['entries'] = Entry.objects.filter(element_id = self.object.id) # pylint: disable=maybe-no-member
         return context
 
 class ElementCreateView(SuccessMessageMixin, CreateView):
