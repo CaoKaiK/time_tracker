@@ -63,11 +63,11 @@
             <tbody>
                 {% for entry in entries %}
                 <tr>
-                    <th scope="row">{{ entry.element.element }}</th>
-                    <td>{{ entry.date }}</td>                    
+                    <td>{{ entry.element.element }}</td>
+                    <td>{{ entry.date | date:"Y-m-d" }}</td>                    
                     <td>{{ entry.description }}</td>
-                    <td>{{ entry.start }}</td>
-                    <td>{{ entry.end }}</td>
+                    <td>{{ entry.start | date:"H:i" }}</td>
+                    <td>{{ entry.end | date:"H:i" }}</td>
                     <td>{{ entry.duration}}</td>
                 </tr>
                 {% endfor %}
