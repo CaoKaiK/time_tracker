@@ -20,6 +20,9 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css" href="{% static 'icons/all.min.css' %}">
 </head>
 
 
@@ -40,22 +43,26 @@
                     <nav class="nav flex-column">
                         <a class="nav-link {% if request.resolver_match.url_name == "entries" %} badge-info {% else %} badge-light {% endif %}"
                             href="{% url 'entries'%}">
+                            <i class="fas fa-clock fa-fw mr-2"></i>
                             <span>Time Entries </span>
 
                         </a>
                         <a class="nav-link {% if "projects" in request.resolver_match.url_name %} badge-info {% else %} badge-light {% endif %}"
                             href="{% url 'projects-list'%}">
+                            <i class="fas fa-project-diagram fa-fw mr-2"></i>
                             <span>Projects </span>
 
                         </a>
 
                         <a class="nav-link {% if request.resolver_match.url_name == "dashboard" %} badge-info {% else %} badge-light {% endif %}"
                             href="#">
+                            <i class="fas fa-chart-bar fa-fw mr-2"></i>
                             <span>Dashboard </span>
 
                         </a>
                         <a class="nav-link {% if request.resolver_match.url_name == "reports" %} badge-info {% else %} badge-light {% endif %}"
                             href="#">
+                            <i class="fas fa-file-invoice fa-fw mr-2"></i>
                             <span>Reports </span>
 
                         </a>
