@@ -6,8 +6,8 @@
 
 <div class="card shadow-sm card-sm mb-3">
     <div class="card-body">
-        <a href="{% url 'projects-create' %}" class="card-title-link">
-            <h5 class="card-title">New Project</h5>
+        <a href="{% url 'projects-create' %}" class="card-title-link align-middle">
+            <h5 class="card-title "><i class="fas fa-plus-square mr-3" style="color: gray;"></i>New Project</h5>
         </a>
     </div>
 </div>
@@ -29,9 +29,9 @@
         {% endfor%}
     </div>
     <div class="card-footer text-muted">
-        <a href="{% url 'projects-element-create' pk=project.id %}" class="badge badge-success">Add WBS</a>
-        <a href="{% url 'projects-update' pk=project.id %}" class="badge badge-warning">Edit</a>
-        <a href="{% url 'projects-delete' pk=project.id %}" class="badge badge-danger">Delete</a>
+        <a href="{% url 'projects-element-create' pk=project.id %}" class="badge badge-secondary"><i class="fas fa-plus-square mr-1"></i>Add WBS</a>
+        <a href="{% url 'projects-update' pk=project.id %}" class="badge badge-secondary"><i class="fas fa-edit mr-1"></i>Edit</a>
+        
     </div>
 </div>
 

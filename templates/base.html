@@ -8,6 +8,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
+
     {% if title %}
     <title> {{ title }} | Time Tracker </title>
     {% else %}
@@ -44,27 +46,25 @@
                         <a class="nav-link {% if request.resolver_match.url_name == "entries" %} badge-info {% else %} badge-light {% endif %}"
                             href="{% url 'entries'%}">
                             <i class="fas fa-clock fa-fw mr-2"></i>
-                            <span>Time Entries </span>
-
+                            <span>Time Entries</span>
                         </a>
+
                         <a class="nav-link {% if "projects" in request.resolver_match.url_name %} badge-info {% else %} badge-light {% endif %}"
                             href="{% url 'projects-list'%}">
                             <i class="fas fa-project-diagram fa-fw mr-2"></i>
-                            <span>Projects </span>
-
+                            <span>Projects</span>
                         </a>
 
                         <a class="nav-link {% if request.resolver_match.url_name == "dashboard" %} badge-info {% else %} badge-light {% endif %}"
                             href="#">
                             <i class="fas fa-chart-bar fa-fw mr-2"></i>
-                            <span>Dashboard </span>
-
+                            <span>Dashboard</span>
                         </a>
+
                         <a class="nav-link {% if request.resolver_match.url_name == "reports" %} badge-info {% else %} badge-light {% endif %}"
                             href="#">
                             <i class="fas fa-file-invoice fa-fw mr-2"></i>
-                            <span>Reports </span>
-
+                            <span>Reports</span>
                         </a>
                     </nav>
                 </div>

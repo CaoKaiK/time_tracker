@@ -11,17 +11,23 @@
             <li class="nav-item">
                 <a href="{% url 'projects-update' pk=project.id %}" class="nav-link">Edit</a>
             </li>
+            <li class="nav-item ml-auto">
+                <a href="{% url 'projects-delete' pk=project.id %}" class="badge badge-danger"><i class="fas fa-trash-alt mr-2"></i>Delete</a>
+            </li>            
         </ul>
     </div>
+    
+        
+    
     <div class="card-body">
         <div class="container-fluid no-pad">
             <div class="row">
                 <div class="col-md-8">
                     <h5 class="card-title"> {{ object.project_name }}   
                         {% if object.active == True %}
-                        <span class="badge badge-success">Active</span>
+                        <span class="badge badge-success ml-3">Active</span>
                         {% else %}
-                        <span class="badge badge-danger">Inactive</span>
+                        <span class="badge badge-danger ml-3">Inactive</span>
                         {% endif %}
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ object.country_name }}</h6>
@@ -52,7 +58,7 @@
 
         <h5 class="card-title">WBS-Elements:</h5>
         
-        <a class="btn btn-secondary mt-3 mb-3" href="{% url 'projects-element-create' pk=project.id %}" role="button">Create WBS</a>
+        <a class="btn btn-secondary mt-3 mb-3" href="{% url 'projects-element-create' pk=project.id %}" role="button"><i class="fas fa-plus-square mr-2"></i>Add WBS</a>
 
         
 
