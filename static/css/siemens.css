@@ -1,0 +1,204 @@
+
+/* custom buttons and badges */
+.btn-teal-light {
+    color: #fff;
+    background-color: #41aaaa;
+    border-color: #41aaaa;
+  }
+  
+  .btn-teal-light:hover {
+    color: #fff;
+    background-color: #0f8287;
+    border-color: #0f8287;
+  }
+  
+  .btn-teal-light.focus, .btn-teal-light:focus {
+    box-shadow: 0 0 0 .2rem rgba(130, 138, 145, .5)
+  }
+  
+  .btn-teal-light.disabled, .btn-teal-light:disabled {
+    color: #fff;
+    background-color: #41aaaa;
+    border-color: #41aaaa;
+  }
+  
+  .btn-teal-light:not(:disabled):not(.disabled).active, .btn-teal-light:not(:disabled):not(.disabled):active, .show>.btn-teal-light.dropdown-toggle {
+    color: #fff;
+    background-color: #0f8287;
+    border-color: #0f8287
+  }
+  
+  .btn-teal-light:not(:disabled):not(.disabled).active:focus, .btn-teal-light:not(:disabled):not(.disabled):active:focus, .show>.btn-teal-light.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(50, 160, 160, .5)
+  }
+  
+  .badge-teal-light {
+    color: #fff;
+    background-color: #41aaaa
+  }
+  
+  a.badge-teal-light:focus, a.badge-teal-light:hover {
+    color: #fff;
+    background-color: #0f8287
+  }
+  
+  a.badge-teal-light.focus, a.badge-teal-light:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(50, 160, 160, .5)
+  }
+  
+  .btn-siemens-green {
+    color: #fff;
+    background-color: #96a51e;
+    border-color: #96a51e
+  }
+  
+  .btn-siemens-green:hover {
+    color: #fff;
+    background-color: #738732;
+    border-color: #738732
+  }
+  
+  .btn-siemens-green.focus, .btn-siemens-green:focus {
+    box-shadow: 0 0 0 .2rem rgba(130, 150, 40, .5)
+  }
+  
+  .btn-siemens-green.disabled, .btn-siemens-green:disabled {
+    color: #fff;
+    background-color: #96a51e;
+    border-color: #96a51e
+  }
+  
+  .btn-siemens-green:not(:disabled):not(.disabled).active, .btn-siemens-green:not(:disabled):not(.disabled):active, .show>.btn-siemens-green.dropdown-toggle {
+    color: #fff;
+    background-color: #738732;
+    border-color: #738732
+  }
+  
+  .btn-siemens-green:not(:disabled):not(.disabled).active:focus, .btn-siemens-green:not(:disabled):not(.disabled):active:focus, .show>.btn-siemens-green.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(130, 138, 145, .5)
+  }
+  
+  .badge-siemens-green {
+    color: #fff;
+    background-color: #96a51e
+  }
+  
+  a.badge-siemens-green:focus, a.badge-siemens-green:hover {
+    color: #fff;
+    background-color: #738732
+  }
+  
+  a.badge-siemens-green.focus, a.badge-siemens-green:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(130, 150, 40, .5)
+  }
+  
+  .alert-success {
+    color: #556e28;
+    background-color: #f0f08c;
+    border-color: #e6e65f
+  }
+  
+  .alert-success hr {
+    border-top-color: #b1dfbb
+  }
+  
+  .alert-success .alert-link {
+    color: #37500f
+  }
+  
+  
+  .btn-siemens-red {
+    color: #fff;
+    background-color: #af235f;
+    border-color: #af235f
+  }
+  
+  .btn-siemens-red:hover {
+    color: #fff;
+    background-color: #781e4b;
+    border-color: #781e4b
+  }
+  
+  .btn-siemens-red.focus, .btn-siemens-red:focus {
+    box-shadow: 0 0 0 .2rem rgba(155, 30, 90, .5)
+  }
+  
+  .btn-siemens-red.disabled, .btn-siemens-red:disabled {
+    color: #fff;
+    background-color: #af235f;
+    border-color: #af235f
+  }
+  
+  .btn-siemens-red:not(:disabled):not(.disabled).active, .btn-siemens-red:not(:disabled):not(.disabled):active, .show>.btn-siemens-red.dropdown-toggle {
+    color: #fff;
+    background-color: #781e4b;
+    border-color: #781e4b
+  }
+  
+  .btn-siemens-red:not(:disabled):not(.disabled).active:focus, .btn-siemens-red:not(:disabled):not(.disabled):active:focus, .show>.btn-siemens-red.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(155, 30, 90, .5)
+  }
+  
+  .badge-siemens-red {
+    color: #fff;
+    background-color: #af235f
+  }
+  
+  a.badge-siemens-red:focus, a.badge-siemens-red:hover {
+    color: #fff;
+    background-color: #781e4b
+  }
+  
+  a.badge-siemens-red.focus, a.badge-siemens-red:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(155, 30, 90, .5)
+  }
+  
+  .btn-siemens-yellow-dark {
+    color: #fff;
+    background-color: #eb780a;
+    border-color: #eb780a
+  }
+  
+  .btn-siemens-yellow-dark:hover {
+    color: #fff;
+    background-color: #b44b28;
+    border-color: #b44b28
+  }
+  
+  .btn-siemens-yellow-dark.focus, .btn-siemens-yellow-dark:focus {
+    box-shadow: 0 0 0 .2rem rgba(200, 90, 30, .5)
+  }
+  
+  .btn-siemens-yellow-dark.disabled, .btn-siemens-yellow-dark:disabled {
+    color: #fff;
+    background-color: #eb780a;
+    border-color: #eb780a
+  }
+  
+  .btn-siemens-yellow-dark:not(:disabled):not(.disabled).active, .btn-siemens-yellow-dark:not(:disabled):not(.disabled):active, .show>.btn-siemens-yellow-dark.dropdown-toggle {
+    color: #fff;
+    background-color: #b44b28;
+    border-color: #b44b28
+  }
+  
+  .btn-siemens-yellow-dark:not(:disabled):not(.disabled).active:focus, .btn-siemens-yellow-dark:not(:disabled):not(.disabled):active:focus, .show>.btn-siemens-yellow-dark.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(200, 90, 30, .5)
+  }
+  
+  .badge-siemens-yellow-dark {
+    color: #fff;
+    background-color: #eb780a
+  }
+  
+  a.badge-siemens-yellow-dark:focus, a.badge-siemens-yellow-dark:hover {
+    color: #fff;
+    background-color: #b44b28
+  }
+  
+  a.badge-siemens-yellow-dark.focus, a.badge-siemens-yellow-dark:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(200, 90, 30, .5)
+  }

@@ -9,60 +9,53 @@
                 <a href="#" class="nav-link active">Project</a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'projects-update' pk=project.id %}" class="nav-link">Edit</a>
+                <a href="{% url 'projects-update' pk=project.id %}" class="nav-link card-nav-link"><i class="fas fa-edit mr-1"></i>Edit</a>
             </li>
             <li class="nav-item ml-auto">
-                <a href="{% url 'projects-delete' pk=project.id %}" class="badge badge-danger"><i class="fas fa-trash-alt mr-2"></i>Delete</a>
-            </li>            
+                <a href="{% url 'projects-delete' pk=project.id %}" class="btn btn-siemens-yellow-dark"><i
+                        class="fas fa-trash-alt mr-2"></i>Delete</a>
+            </li>
         </ul>
     </div>
-    
-        
-    
+
     <div class="card-body">
         <div class="container-fluid no-pad">
             <div class="row">
-                <div class="col-md-8">
-                    <h5 class="card-title"> {{ object.project_name }}   
+                <div class="col-md-8 vl">
+                    <h5 class="card-title"> {{ object.project_name }}
                         {% if object.active == True %}
-                        <span class="badge badge-success ml-3">Active</span>
+                        <span class="badge badge-siemens-green ml-3">Active</span>
                         {% else %}
-                        <span class="badge badge-danger ml-3">Inactive</span>
+                        <span class="badge badge-siemens-yellow-dark ml-3">Inactive</span>
                         {% endif %}
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ object.country_name }}</h6>
                     <hr>
-                    <h6 class="card-subtitle mb-2 text-muted">Created on:</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ object.created_date | date:"Y-m-d H:i"}}</h6>
-                    <br>
-                    <h6 class="card-subtitle mb-2 text-muted">Modified on:</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ object.modified_date | date:"Y-m-d H:i"}}</h6>
+                    <ul class="nav">
+                        <li class="card-subtitle mb-2 text-muted mr-3">
+                            Created on: {{ object.created_date | date:"Y-m-d H:i"}}
+                        </li>
+                        <li class="card-subtitle mb-2 text-muted">
+                            Last modified on: {{ object.modified_date | date:"Y-m-d H:i"}}
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-md-4">
-                    <div class="card border-dark mb-3">
-                        <div class="card-header">Customer</div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ object.customer_name}}</h5>
-                            <p class="card-text">
+                    <h6 class="card-subtitle mb-2 text-muted">Customer:</h6>
+                    <h5 class="card-title">{{ object.customer_name}}</h5>
+                    
+                    <p class="card-text">
                                 {{ object.customer_street}}<br>
                                 {{ object.customer_postal}}<br>
                                 {{ object.customer_city}}, {{ object.country_name }}
-                            </p>
-                        </div>
-                    </div>
+                    </p>
                 </div>
             </div>
         </div>
 
-
-
-        <h5 class="card-title">WBS-Elements:</h5>
+        <h5 class="card-title">WBS-Elements: <a class="btn btn-secondary ml-4" href="{% url 'projects-element-create' pk=project.id %}" role="button"><i
+            class="fas fa-plus-square mr-2"></i>Add WBS</a> </h5>
         
-        <a class="btn btn-secondary mt-3 mb-3" href="{% url 'projects-element-create' pk=project.id %}" role="button"><i class="fas fa-plus-square mr-2"></i>Add WBS</a>
-
-        
-
-
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -78,7 +71,7 @@
                 <tr>
                     <th scope="row">
                         {% if element.active == True %}
-                        <span class="badge badge-success">Active</span>
+                        <span class="badge badge-siemens-green">Active</span>
                         {% else %}
                         <span class="badge badge-danger">Inactive</span>
                         {% endif %}
@@ -91,7 +84,6 @@
                     <td>{{element.act}}</td>
                     <td>{{element.act_type}}</td>
                     <td>{{element.act_description}}</td>
-
                 </tr>
                 {% endfor %}
             </tbody>
