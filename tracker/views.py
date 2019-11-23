@@ -33,7 +33,7 @@ class ProjectCreateView(SuccessMessageMixin, CreateView):
         'customer_postal',
         'customer_city',
         ]
-    template_name_suffix ='_create_form'
+    #template_name_suffix ='_create_form'
     
     success_message = "Project %(project_name)s was created"
     def get_success_url(self):
@@ -89,6 +89,21 @@ class ElementCreateView(SuccessMessageMixin, CreateView):
     success_message = "Element %(element)s was created"
     def get_success_url(self):
         return reverse('projects-detail', kwargs={'pk': self.object.project_id})
+
+class ElementUpdateView(SuccessMessageMixin, UpdateView):
+    model = Element
+    fields = [
+        'project',
+        'element',
+        'act_description',
+        'act_type',
+        'act',
+        'active'
+    ]
+
+    success_message = "Element %(element)s was updated"
+    def get_success_url(self):
+        return reverse('projects-detail', kwargs={'pk': self.object.project.pk})
 
 
 class EntryListView(ListView):

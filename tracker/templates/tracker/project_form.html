@@ -7,10 +7,22 @@
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a href="{% url 'projects-detail' pk=project.id %}" class="nav-link">Project</a>
+                {% if project %}
+                <a href="{% url 'projects-detail' pk=project.id %}" class="nav-link card-nav-link">Project</a>
+                {% else %}
+                <a href="{% url 'projects-list' %}" class="nav-link card-nav-link">Project</a>
+                {% endif%}
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link active"><i class="fas fa-edit mr-1"></i>Edit</a>
+                <a href="#" class="nav-link active"><i class="fas fa-edit mr-2"></i>Edit</a>
+            </li>
+            <li class="nav-item ml-auto">
+                {% if project %}
+                <a href="{% url 'projects-delete' pk=project.id %}" class="btn btn-siemens-yellow-dark">
+                {% else%}
+                <a href="#" class="btn btn-siemens-yellow-dark">
+                {% endif %}
+                <i class="fas fa-trash-alt mr-2"></i>Delete</a>
             </li>
 
         </ul>
