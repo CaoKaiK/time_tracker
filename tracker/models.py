@@ -43,6 +43,7 @@ class Entry(models.Model):
     duration = models.IntegerField('Duration in minutes', help_text="Duration in minutes")
     description = models.CharField(max_length=20, help_text="Individual Description (default = Description from WBS/PSP)")
     element = models.ForeignKey(Element, on_delete=models.SET_NULL, null=True, default=None)
+    rest = models.IntegerField('Resting Period', default=0, help_text="Resting Period in minutes")
 
     def __str__(self):
         return self.date.strftime('%Y-%m-%d') # pylint: disable=maybe-no-member

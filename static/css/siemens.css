@@ -202,3 +202,18 @@
     outline: 0;
     box-shadow: 0 0 0 .2rem rgba(200, 90, 30, .5)
   }
+
+  .alert-warning {
+    color: #b44b28;
+    background-color: #ffcd50;
+    border-color: #faa50a
+  }
+  
+  .alert-warning hr {
+    border-top-color: #b1dfbb
+  }
+  
+  .alert-warning .alert-link {
+    color: #7d2d1e
+  }
+  

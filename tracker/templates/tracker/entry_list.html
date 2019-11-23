@@ -30,6 +30,7 @@
                     <th scope="col">Description</th>
                     <th scope="col">Start</th>
                     <th scope="col">End</th>
+                    <th scope="col">Break</th>
                     <th scope="col">Duration</th>
                 </tr>
             </thead>
@@ -43,6 +44,7 @@
                     <td>{{entry.description}}</td>
                     <td>{{entry.start | date:"H:i"}}</td>
                     <td>{{entry.end | date:"H:i"}}</td>
+                    <td>{{entry.rest}}</td>
                     <td>{{entry.duration}}</td>
                 </tr>
                 {% endfor %}

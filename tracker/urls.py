@@ -9,6 +9,7 @@ from .views import (
     ElementDetailView,
     ElementCreateView,
     ElementUpdateView,
+    ElementDeleteView,
     EntryListView,
     EntryDetailView,
     EntryCreateView,
@@ -24,7 +25,8 @@ urlpatterns = [
     path('projects/<int:pk>/delete/', ProjectDeleteView.as_view(), name="projects-delete"),    
     path('projects/<int:pk_pro>/element/<int:pk>', ElementDetailView.as_view(), name='projects-element-detail'),
     path('projects/<int:pk>/element/create', ElementCreateView.as_view(), name='projects-element-create'),
-    path('projects/<int:pk_pro>/element/<int:pk>/update', ElementUpdateView.as_view(), name='projects-element-update'),
+    path('projects/<int:pk_pro>/element/<int:pk>/update', ElementUpdateView.as_view(), name='projects-element-update'),    
+    path('projects/<int:pk_pro>/element/<int:pk>/delete', ElementDeleteView.as_view(), name='projects-element-delete'),
     path('entries/', EntryListView.as_view(), name='entries'),
 
 ]
