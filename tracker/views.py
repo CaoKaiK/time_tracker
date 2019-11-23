@@ -66,6 +66,9 @@ class ProjectDeleteView(DeleteView):
 
 
 
+
+
+
 class ElementDetailView(DetailView):
     model = Element
 
@@ -117,10 +120,13 @@ class ElementDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('projects-detail', kwargs={'pk': self.object.project_id})
 
+
+
+
+
+
 class EntryListView(ListView):
     model = Entry
-
-
 
 class EntryDetailView(DetailView):
     model = Entry
@@ -134,6 +140,6 @@ class EntryCreateView(CreateView):
         'end',
         'rest',
         'duration',
-        'desciption',        
+        'description',        
     ]
 

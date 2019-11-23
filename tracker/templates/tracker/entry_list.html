@@ -37,7 +37,10 @@
             <tbody>
                 {% for entry in object_list %}
                 <tr>
-                    <th scope="row">{{entry.id}}</th>
+                    <td><a href="{% url 'entries-detail' pk=entry.id %}">
+                            {{entry.id}}
+                        </a>
+                    </th>
                     <td>{{entry.date | date:"Y-m-d"}}</td>
                     <td>{{entry.element.project.project_name}}</td>
                     <td>{{entry.element.element}}</td>
