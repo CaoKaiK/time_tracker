@@ -15,7 +15,7 @@
                 {% endif %}
             </li>
             <li class="nav-item">
-                {% if object.element.element %}
+                {% if object.element.project.id and object.element.element %}
                 <a href="{% url 'projects-elements-detail' pk_pro=object.element.project.id pk=object.element_id%}" class="nav-link card-nav-link"><i
                     class="fas fa-caret-square-left mr-2"></i>WBS</a>
                 {% else %}
