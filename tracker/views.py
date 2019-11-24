@@ -140,7 +140,8 @@ class EntryCreateView(CreateView):
         'end',
         'rest',
         'duration',
-        'description',        
+        'description',
+        'booked',        
     ]
 
 class EntryUpdateView(SuccessMessageMixin, UpdateView):
@@ -153,6 +154,7 @@ class EntryUpdateView(SuccessMessageMixin, UpdateView):
         'description',
         'element',
         'rest',
+        'booked',
     ]
 
     success_message = "Entry %(id)s was updated for %(element)s"
