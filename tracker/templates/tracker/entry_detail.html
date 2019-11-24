@@ -30,7 +30,7 @@
                 <a href="{% url 'entries-update' pk=object.id %}" class="nav-link card-nav-link"><i class="fas fa-edit mr-2"></i>Edit</a>
             </li>
             <li class="nav-item ml-auto">
-                <a href="#" class="btn btn-siemens-yellow-dark"><i class="fas fa-trash-alt mr-2"></i>Delete</a>
+                <a href="{% url 'entries-delete' pk=object.id %}" class="btn btn-siemens-yellow-dark"><i class="fas fa-trash-alt mr-2"></i>Delete</a>
             </li>
         </ul>
     </div>

@@ -164,3 +164,15 @@ class EntryUpdateView(SuccessMessageMixin, UpdateView):
     success_message = "Entry for %(element)s was updated " 
     def get_success_url(self):
         return reverse('entries-detail', kwargs={'pk': self.object.pk})
+
+class EntryDeleteView(DeleteView):
+    model = Entry
+
+    success_message = "Entry was deleted"
+
+    def delete(self, request, *args, **kwargs):
+        messages.warning(self.request, self.success_message)
+        return super(EntryDeleteView, self).delete(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('projects-element-detail', kwargs={'pk_pro': self.object.element.project_id, 'pk': self.object.element_id})
