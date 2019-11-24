@@ -143,3 +143,19 @@ class EntryCreateView(CreateView):
         'description',        
     ]
 
+class EntryUpdateView(SuccessMessageMixin, UpdateView):
+    model = Entry
+    fields = [
+        'date',
+        'start',
+        'end',
+        'duration',
+        'description',
+        'element',
+        'rest',
+    ]
+
+    success_message = "Entry %(id)s was updated for %(element)s"
+
+    def get_success_url(self):
+        return reverse('entries-detail', kwargs={'pk': self.object.pk})

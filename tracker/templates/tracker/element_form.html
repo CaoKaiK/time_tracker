@@ -6,11 +6,11 @@
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a href="#" class="nav-link card-nav-link"><i
+                <a href="{% url 'projects-detail' pk=element.project.id %}" class="nav-link card-nav-link"><i
                         class="fas fa-caret-square-left mr-2"></i>Project</a>
             </li>            
             <li class="nav-item">
-                <a href="#" class="nav-link card-nav-link">WBS</a>
+                <a href="{% url 'projects-element-detail' pk_pro=element.project.id pk=element.id %}" class="nav-link card-nav-link">WBS</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link active"><i class="fas fa-edit mr-2"></i>Edit</a>
