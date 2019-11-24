@@ -131,7 +131,7 @@ class EntryListView(ListView):
 class EntryDetailView(DetailView):
     model = Entry
 
-class EntryCreateView(CreateView):
+class EntryCreateView(SuccessMessageMixin, CreateView):
     model = Entry
     fields = [
         'element',
@@ -143,6 +143,10 @@ class EntryCreateView(CreateView):
         'description',
         'booked',        
     ]
+
+    success_message = "Entry for %(element)s was created"
+    def get_success_url(self):
+        return reverse('projects-element-detail', kwargs={'pk_pro': self.object.element.project_id, 'pk': self.object.element_id})
 
 class EntryUpdateView(SuccessMessageMixin, UpdateView):
     model = Entry
@@ -157,7 +161,6 @@ class EntryUpdateView(SuccessMessageMixin, UpdateView):
         'booked',
     ]
 
-    success_message = "Entry %(id)s was updated for %(element)s"
-
+    success_message = "Entry for %(element)s was updated " 
     def get_success_url(self):
         return reverse('entries-detail', kwargs={'pk': self.object.pk})
