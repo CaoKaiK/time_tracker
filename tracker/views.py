@@ -139,7 +139,6 @@ class EntryCreateView(SuccessMessageMixin, CreateView):
         'start',
         'end',
         'rest',
-        'duration',
         'description',
         'booked',        
     ]
@@ -154,7 +153,6 @@ class EntryUpdateView(SuccessMessageMixin, UpdateView):
         'date',
         'start',
         'end',
-        'duration',
         'description',
         'element',
         'rest',
