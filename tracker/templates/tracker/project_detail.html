@@ -64,6 +64,7 @@
                     <th scope="col">Activity</th>
                     <th scope="col">Activity Type</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Entries</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,6 +85,7 @@
                     <td>{{element.act}}</td>
                     <td>{{element.act_type}}</td>
                     <td>{{element.act_description}}</td>
+                    <td><a href="{% url 'projects-element-detail' pk_pro=project.id pk=element.id %}" class="badge badge-primary">{{element.get_subfeature_entries.count}}</a></span></td>
                 </tr>
                 {% endfor %}
             </tbody>
