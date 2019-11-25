@@ -30,8 +30,6 @@ class Element(models.Model):
     act = models.IntegerField('Activity', help_text='Activity Type for this WBS/PSP')
 
     active = models.BooleanField(default=True, help_text='WBS is still active')
-
-
     
     def get_subfeature_entries(self):
         return self.entry_set.filter(element_id = self.id) # pylint: disable=maybe-no-member
@@ -49,14 +47,11 @@ class Entry(models.Model):
     @property
     def duration(self):
         duration = self.end - self.start - timedelta(minutes=self.rest)
-        return duration
+        return int(duration.total_seconds()/60)
     
     description = models.CharField(max_length=20, help_text='Individual Description (default = Description from WBS/PSP)')
-    
-    
-    
+        
     booked = models.BooleanField('Booked', default=False, help_text='Entry is booked in SAP')
-
 
     def __str__(self):
         return self.date.strftime('%Y-%m-%d') # pylint: disable=maybe-no-member

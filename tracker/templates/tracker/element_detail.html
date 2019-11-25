@@ -88,7 +88,7 @@
                     <td>{{ entry.start | date:"H:i" }}</td>
                     <td>{{ entry.end | date:"H:i" }}</td>
                     <td>{{ entry.rest | hour_minute_format }}</td>
-                    <td>{{ entry.duration }}</td>
+                    <td>{{ entry.duration | hour_minute_format }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
