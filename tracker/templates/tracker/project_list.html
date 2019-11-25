@@ -25,7 +25,7 @@
         
         {% for element in project.get_subfeature_elements %}
         <a href="{% url 'projects-element-create' pk=project.id %}"
-            class="badge badge-secondary">{{ element.element }}</a>
+            class="badge badge-secondary">{{ element.element }} | {{ element.act_description}}</a>
         {% endfor%}
     </div>
     <div class="card-footer text-muted">

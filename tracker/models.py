@@ -40,7 +40,7 @@ class Element(models.Model):
 
 class Entry(models.Model):
     element = models.ForeignKey(Element, on_delete=models.SET_NULL, null=True, default=None)
-    date = models.DateField('Date')
+    date = models.DateField('Date', default=datetime.now)
     start = models.DateTimeField('Start Time')
     end = models.DateTimeField('End Time')
     rest = models.IntegerField('Resting Period', default=0, help_text='Resting Period in minutes')
