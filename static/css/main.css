@@ -41,6 +41,10 @@
     padding-right: 0rem;
     padding-left: 0rem;
   }
+  .nav-bot {
+    margin-top: calc(100vh - 16.4rem);
+  }
+
 }
 
 .custom-sticky {
@@ -48,9 +52,9 @@
 }
 
 .content {
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 15px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
 }
 
 .no-pad {
@@ -80,5 +84,5 @@
 
 
 .vl {
-  border-right: 1px solid rgba(0,0,0,.1)
+  border-right: 0.1rem solid rgba(0,0,0,.1)
 }

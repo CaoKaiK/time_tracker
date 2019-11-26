@@ -52,7 +52,7 @@
         <div class="row">
             <div class="col-md-3 col-lg-2 lg-max bd-sidebar">
                 <div class="sticky-top custom-sticky">
-                    <nav class="nav flex-column">
+                    <ul class="nav flex-column">
                         <a class="nav-link {% if "entries" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
                             href="{% url 'entries'%}">
                             <i class="fas fa-clock fa-fw mr-2"></i>
@@ -76,7 +76,12 @@
                             <i class="fas fa-file-invoice fa-fw mr-2"></i>
                             <span>Reports</span>
                         </a>
-                    </nav>
+
+                        <a class="nav-link card-nav-link nav-bot"
+                            href="{% url 'about' %}">
+                            <span>About</span>
+                        </a>
+                    </ul>
                 </div>
             </div>
             <div class="col-md-9 col-lg-10 content">
