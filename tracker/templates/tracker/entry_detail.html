@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load filters %}
 {% block content %}
 
 <div class="card shadow-sm mb-3">
@@ -36,7 +36,7 @@
     </div>
     <div class="card-body">
                 	
-                    <h5 class="card-title"> ID: {{ object.id}} | {{ object.date | date:"Y-m-d" }}</h5>
+                    <h5 class="card-title"> ID: {{ object.id}}</h5>
                     {% if object.element.element %}
                     <h6 class="card-subtitle mb-2 text-muted">{{ object.element.element }}</h6>
                     {% else %}
@@ -48,8 +48,23 @@
                     <h6 class="card-subtitle mb-2 text-muted">No Project assigned to this Entry</h6>
                     {% endif %}
                     <hr>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">+ Break</th>
+                            </tr>
+                            <tr>
+                                <td>{{entry.date | date:"Y-m-d"}}</td>
+                                <td>{{entry.description}}</td>
+                                <td>{{entry.duration | hour_minute_format }}</td>
+                                <td>{{entry.rest | hour_minute_format }}</td>
 
-
+                            </tr>
+                        </thead>
+                        <tbody>
     </div>
 </div>
 

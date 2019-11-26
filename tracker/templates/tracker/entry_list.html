@@ -41,7 +41,7 @@
                     <td><a href="{% url 'entries-detail' pk=entry.id %}">
                             {{entry.id}}
                         </a>
-                    </th>
+                    </td>
                     <td>{{entry.date | date:"Y-m-d"}}</td>
                     <td>{{entry.element.project.project_name}}</td>
                     <td>{{entry.element.element}}</td>
