@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% load static%}
+
+{% block content %}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">Resources</h5>
+    </div>
+
+    <div class="card-deck ml-3 mr-3 mb-3">
+        <div class="card">
+            <img src="{% static 'img/django-logo-big.jpg' %}" class="card-img-top" alt="django-logo-big">
+            <div class="card-body">
+                <h5 class="card-title">Django-Framework</h5>
+                <p class="card-text">The web framework for perfectionists with deadlines.</p>
+                <p class="card-text">Django is a high-level Python
+                    Web framework that encourages rapid development and clean, pragmatic design. Built by experienced
+                    developers, it takes care of much of the hassle of Web development, so you can focus on writing your
+                    app without needing to reinvent the wheel. It’s free and open source. </p>
+                <p class="card-text"><small class="text-muted"><a href="https://www.djangoproject.com">Link</a></small>
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static 'img/sqlite.png' %}" class="card-img-top" alt="sqlite">
+            <div class="card-body">
+                <h5 class="card-title">SQLite</h5>
+                <p class="card-text">Small. Fast. Reliable. Choose any three.</p>
+                <p class="card-text">SQLite is a C-language library that implements a small, fast, self-contained,
+                    high-reliability, full-featured, SQL database engine. SQLite is the most used database engine in the
+                    world. SQLite is built into all mobile phones and most computers and comes bundled inside countless
+                    other applications that people use every day.</p>
+                <p class="card-text"><small class="text-muted"><a
+                            href="https://www.sqlite.org/index.html">Link</a></small>
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static 'img/bootstrap.png' %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Bootstrap</h5>
+                <p class="card-text"> Build responsive, mobile-first projects on the web with the world’s most popular
+                    front-end component library.
+
+                    Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your
+                    ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive
+                    prebuilt components, and powerful plugins built on jQuery. </p>
+
+                    <p class="card-text"> Build responsive, mobile-first projects on the web with the world’s most popular
+                            front-end component library.
+        
+                            Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your
+                            ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive
+                            prebuilt components, and powerful plugins built on jQuery. </p>
+                            <p class="card-text"> Build responsive, mobile-first projects on the web with the world’s most popular
+                                    front-end component library.
+                
+                                    Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your
+                                    ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive
+                                    prebuilt components, and powerful plugins built on jQuery. </p>
+                <p class="card-text"><small class="text-muted"><a href="https://getbootstrap.com/">Link</a></small>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock content %}
