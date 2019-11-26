@@ -7,7 +7,7 @@
 }
 
 .logo-full {
-  height: 4rem;
+  height: 2rem;
   margin-right: 0;
   margin-bottom: 0;
 }
@@ -26,6 +26,7 @@
   right: 0;
   left: 0;
   z-index: 1030;
+  padding-bottom: 0.75rem;
 }
 
 .bd-sidebar {
@@ -43,7 +44,7 @@
 }
 
 .custom-sticky {
-  top: 80px;
+  top: 3.4rem;
 }
 
 .content {
@@ -58,6 +59,12 @@
   margin-left: 0px;
   margin-right: 0px;
 }
+
+.no-pad-tb {
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
 .card-sm {
   width: 18rem;
 }
