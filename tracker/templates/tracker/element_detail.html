@@ -63,10 +63,8 @@
                     <th scope="col">Status</th>
                     <th scope="col">Date</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Start</th>
-                    <th scope="col">End</th>
-                    <th scope="col">Break</th>
                     <th scope="col">Duration</th>
+                    <th scope="col">+ Break Time</th>
                 </tr>
             </thead>
             <tbody>
@@ -85,10 +83,8 @@
                         </a>
                         </td>
                     <td>{{ entry.description }}</td>
-                    <td>{{ entry.start | date:"H:i" }}</td>
-                    <td>{{ entry.end | date:"H:i" }}</td>
-                    <td>{{ entry.rest | hour_minute_format }}</td>
                     <td>{{ entry.duration | hour_minute_format }}</td>
+                    <td>{{ entry.rest | hour_minute_format }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

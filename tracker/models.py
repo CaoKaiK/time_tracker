@@ -27,7 +27,7 @@ class Element(models.Model):
     element = models.CharField(max_length=24, help_text='WBS/PSP-Element')
     act_description = models.CharField(max_length=20, help_text='Describes the general activity for this WBS/PSP')
     act_type = models.CharField('Activity Type', max_length=6, help_text='Activity Type for this WBS/PSP')
-    act = models.IntegerField('Activity', help_text='Activity Type for this WBS/PSP')
+    act = models.IntegerField('Activity', help_text='Activity for this WBS/PSP')
 
     active = models.BooleanField(default=True, help_text='WBS is still active')
     
@@ -41,16 +41,9 @@ class Element(models.Model):
 class Entry(models.Model):
     element = models.ForeignKey(Element, on_delete=models.SET_NULL, null=True, default=None)
     date = models.DateField('Date', default=datetime.now)
-    start = models.DateTimeField('Start Time')
-    end = models.DateTimeField('End Time')
-    rest = models.IntegerField('Resting Period', default=0, help_text='Resting Period in minutes')
-    @property
-    def duration(self):
-        duration = self.end - self.start - timedelta(minutes=self.rest)
-        return int(duration.total_seconds()/60)
-    
+    duration = models.IntegerField('Duration', help_text='Duration in minutes')
+    rest = models.IntegerField('Resting Period', default=0, help_text='Resting Period in minutes')    
     description = models.CharField(max_length=20, help_text='Individual Description (default = Description from WBS/PSP)')
-        
     booked = models.BooleanField('Booked', default=False, help_text='Entry is booked in SAP')
 
     def __str__(self):
