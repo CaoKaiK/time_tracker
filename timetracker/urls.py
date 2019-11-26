@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
     path('', include('tracker.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('api/v1/', include('api.urls')),
     path('about/', views.about, name='about'),
     path('admin/', admin.site.urls),
 ]
