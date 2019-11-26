@@ -136,8 +136,7 @@ class EntryCreateView(SuccessMessageMixin, CreateView):
     fields = [
         'element',
         'date',
-        'start',
-        'end',
+        'duration',
         'rest',
         'description',
         'booked',        
@@ -150,12 +149,11 @@ class EntryCreateView(SuccessMessageMixin, CreateView):
 class EntryUpdateView(SuccessMessageMixin, UpdateView):
     model = Entry
     fields = [
-        'date',
-        'start',
-        'end',
-        'description',
         'element',
+        'date',
+        'duration',
         'rest',
+        'description',        
         'booked',
     ]
 
