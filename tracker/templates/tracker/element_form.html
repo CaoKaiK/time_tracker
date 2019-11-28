@@ -9,6 +9,9 @@
                 {% if element.project.id %}
                 <a href="{% url 'projects-detail' pk=element.project.id %}" class="nav-link card-nav-link"><i
                         class="fas fa-caret-square-left mr-2"></i>Project</a>
+                {% elif project %}
+                <a href="{% url 'projects-detail' pk=project.id %}" class="nav-link card-nav-link"><i
+                    class="fas fa-caret-square-left mr-2"></i>{{project.project_name}}{{id}}</a>
                 {% else %}
                 <a href="{% url 'projects-list' %}" class="nav-link card-nav-link"><i
                         class="fas fa-caret-square-left mr-2"></i>Unsaved Project</a>

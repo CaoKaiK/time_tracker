@@ -85,6 +85,13 @@ class ElementCreateView(SuccessMessageMixin, CreateView):
         'act_type',
         'act',
     ]
+    
+    def get_context_data(self, **kwargs):
+        context = super(ElementCreateView, self).get_context_data(**kwargs)
+        project = Project.objects.get(id=self.kwargs.get('pk')) # pylint: disable=maybe-no-member
+        context.update({'project': project})
+        return context
+
     def form_valid(self, form):
         form.instance.project_id = self.kwargs.get('pk')
         return super(ElementCreateView, self).form_valid(form)
@@ -142,7 +149,22 @@ class EntryCreateView(SuccessMessageMixin, CreateView):
         'booked',        
     ]
 
-    success_message = "Entry for %(element)s was created"
+    
+
+class EntryFromWBSCreateView(EntryCreateView):
+    fields = [
+        'date',
+        'duration',
+        'rest',
+        'description',
+        'booked',        
+    ]
+    
+    def form_valid(self, form):
+        form.instance.element_id = self.kwargs.get('pk')
+        return super(EntryFromWBSCreateView, self).form_valid(form)
+    success_message = "Entry was created"
+
     def get_success_url(self):
         return reverse('projects-element-detail', kwargs={'pk_pro': self.object.element.project_id, 'pk': self.object.element_id})
 

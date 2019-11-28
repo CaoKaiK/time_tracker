@@ -15,10 +15,12 @@
                 <a href="#" class="nav-link active">WBS</a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'projects-element-update' pk_pro=object.project.id pk=object.id %}" class="nav-link card-nav-link"><i class="fas fa-edit mr-2"></i>Edit</a>
+                <a href="{% url 'projects-element-update' pk_pro=object.project.id pk=object.id %}"
+                    class="nav-link card-nav-link"><i class="fas fa-edit mr-2"></i>Edit</a>
             </li>
             <li class="nav-item ml-auto">
-                <a href="{% url 'projects-element-delete' pk_pro=object.project.id pk=object.id %}" class="btn btn-siemens-yellow-dark"><i class="fas fa-trash-alt mr-2"></i>Delete</a>
+                <a href="{% url 'projects-element-delete' pk_pro=object.project.id pk=object.id %}"
+                    class="btn btn-siemens-yellow-dark"><i class="fas fa-trash-alt mr-2"></i>Delete</a>
             </li>
         </ul>
     </div>
@@ -52,8 +54,9 @@
 
 
 
-        <h5 class="card-title">Entries: <a class="btn btn-secondary ml-4" href="{% url 'entries-create' %}" role="button"><i
-            class="fas fa-plus-square mr-2"></i>Add Entry</a></h5>
+        <h5 class="card-title">Entries: <a class="btn btn-secondary ml-4"
+                href="{% url 'projects-element-entry-create' pk_pro=object.project.id pk=object.id %}" role="button"><i
+                    class="fas fa-plus-square mr-2"></i>Add Entry</a></h5>
 
 
 
@@ -79,9 +82,9 @@
                     </td>
                     <td>
                         <a href="{% url 'entries-detail' pk=entry.id%}">
-                                {{ entry.date | date:"Y-m-d" }}
+                            {{ entry.date | date:"Y-m-d" }}
                         </a>
-                        </td>
+                    </td>
                     <td>{{ entry.description }}</td>
                     <td>{{ entry.duration | hour_minute_format }}</td>
                     <td>{{ entry.rest | hour_minute_format }}</td>

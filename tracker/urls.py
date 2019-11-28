@@ -13,6 +13,7 @@ from .views import (
     EntryListView,
     EntryDetailView,
     EntryCreateView,
+    EntryFromWBSCreateView,
     EntryUpdateView,
     EntryDeleteView,
     )
@@ -29,6 +30,7 @@ urlpatterns = [
     path('projects/<int:pk>/element/create', ElementCreateView.as_view(), name='projects-element-create'),
     path('projects/<int:pk_pro>/element/<int:pk>/update', ElementUpdateView.as_view(), name='projects-element-update'),
     path('projects/<int:pk_pro>/element/<int:pk>/delete', ElementDeleteView.as_view(), name='projects-element-delete'),
+    path('projects/<int:pk_pro>/element/<int:pk>/entry/create', EntryFromWBSCreateView.as_view(), name='projects-element-entry-create'),
     path('entries/', EntryListView.as_view(), name='entries'),
     path('entries/<int:pk>', EntryDetailView.as_view(), name='entries-detail'),
     path('entries/create', EntryCreateView.as_view(), name='entries-create'),
