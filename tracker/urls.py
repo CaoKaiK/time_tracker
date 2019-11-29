@@ -1,21 +1,21 @@
 from django.urls import path
 
 # from .views import (
-#     # ProjectListView,
-#     # ProjectDetailView,
-#     # ProjectCreateView,
-#     # ProjectUpdateView,
-#     # ProjectDeleteView,
-#     # ElementDetailView,
-#     # ElementCreateView,
-#     # ElementUpdateView,
-#     # ElementDeleteView,
-#     # EntryListView,
-#     # EntryDetailView,
-#     # EntryCreateView,
-#     # EntryFromWBSCreateView,
-#     # EntryUpdateView,
-#     # EntryDeleteView,
+#     ProjectListView,
+#     ProjectDetailView,
+#     ProjectCreateView,
+#     ProjectUpdateView,
+#     ProjectDeleteView,
+#     ElementDetailView,
+#     ElementCreateView,
+#     ElementUpdateView,
+#     ElementDeleteView,
+#     EntryListView,
+#     EntryDetailView,
+#     EntryCreateView,
+#     EntryFromWBSCreateView,
+#     EntryUpdateView,
+#     EntryDeleteView,
 #     )
 from . import views
 

@@ -54,27 +54,33 @@
                 <div class="sticky-top custom-sticky">
                     <ul class="nav flex-column">
                         <a class="nav-link {% if "entries" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
-                            href="{% url 'entries'%}">
+                            href="#">
                             <i class="fas fa-clock fa-fw mr-2"></i>
                             <span>Time Entries</span>
                         </a>
 
                         <a class="nav-link {% if "projects" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
-                            href="{% url 'projects-list'%}">
+                            href="#">
                             <i class="fas fa-project-diagram fa-fw mr-2"></i>
                             <span>Projects</span>
                         </a>
 
                         <a class="nav-link {% if "dash" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
-                            href="{% url 'dash-test'%}">
+                            href="#">
                             <i class="fas fa-chart-bar fa-fw mr-2"></i>
                             <span>Dashboard</span>
                         </a>
 
-                        <a class="nav-link {% if request.resolver_match.url_name == "reports" %} badge-teal-light {% else %} badge-light {% endif %}"
+                        <a class="nav-link {% if "reports" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
                             href="#">
                             <i class="fas fa-file-invoice fa-fw mr-2"></i>
                             <span>Reports</span>
+                        </a>
+
+                        <a class="nav-link {% if "settings" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
+                        href="{% url 'settings' %}">
+                        <i class="fas fa-user-cog fa-fw mr-2"></i>
+                        <span>Settings</span>
                         </a>
 
                         <a class="nav-link badge-light nav-bot"

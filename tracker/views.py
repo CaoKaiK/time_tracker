@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.messages.views import SuccessMessageMixin
 
 
-from .models import Project
+from .models import Project, Element
 
 
 def home(request):

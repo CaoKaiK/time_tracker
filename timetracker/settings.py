@@ -31,9 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'settings.apps.SettingsConfig',
-    'tracker.apps.TrackerConfig',
-    'dashboard.apps.DashboardConfig',
+    'settings.apps.SettingsConfig',     # Settings
+    'tracker.apps.TrackerConfig',       # Tracker
+    'dashboard.apps.DashboardConfig',   # Dashboard
     'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',

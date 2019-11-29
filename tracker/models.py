@@ -9,14 +9,47 @@ class Customer(models.Model):
     '''
     Customer Model - can be attributed to Group or Project
     '''
-    customer_name = models.CharField(max_length=50, help_text='Customer Name')
-    country = models.CharField(max_length=50, help_text='Customer Country')
-    city = models.CharField(max_length=50, blank=True, null=True, help_text='Customer City')
-    street = models.CharField(max_length=50, blank=True, null=True, help_text='Customer Street')
-    postal = models.CharField(max_length=20, blank=True, null=True, help_text='Customer Postal')
+    customer_name = models.CharField(
+        max_length=50,
+        verbose_name='Customer: Customer Name',
+        help_text='Customer Name'
+        )
+    country = models.CharField(
+        max_length=50,
+        verbose_name='Customer: Country',
+        help_text='Customer Country'
+        )
+    city = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='Customer: City',
+        help_text='Customer City'
+        )
+    street = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='Customer: Street',
+        help_text='Customer Street'
+        )
+    postal = models.CharField(
+        max_length=20,
+        blank=True,
+        null=True,
+        verbose_name='Customer: Postal',
+        help_text='Customer Postal Code'
+        )
+
+    class Meta:
+        verbose_name = 'customer'
+        verbose_name_plural = 'customers'
 
     def __str__(self):
         return self.customer_name
+
+    def get_absolute_url(self):
+        return None
 
 class Group(models.Model):
     '''
@@ -24,13 +57,34 @@ class Group(models.Model):
     No WBS available or combination of receiver cost center, receiver order
     Examples: TG3, TG4, TG5, TG7 ...
     '''
-    group_name = models.CharField(max_length=20, help_text='Activity Group Name')
+    group_name = models.CharField(
+        max_length=20,
+        verbose_name='Group: Group Name',
+        help_text='Activity Group Name'
+        )
     # FK to customer: zero or one to many or none
-    customer_id = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, default=None)
-    active = models.BooleanField(default=True, help_text='Is this Activity Group still active?')
+    customer_id = models.ForeignKey(
+        Customer,
+        on_delete=models.SET_NULL,
+        null=True,
+        default=None,
+        related_name='groups'
+        )
+    active = models.BooleanField(
+        default=True, 
+        verbose_name='Group: Active',
+        help_text='Is this Activity Group still active?'
+        )
+
+    class Meta:
+        verbose_name = 'group'
+        verbose_name_plural = 'groups'
 
     def __str__(self):
         return self.group_name
+
+    def get_absolute_url(self):
+        return None
 
 class Project(models.Model):
     '''
@@ -38,13 +92,34 @@ class Project(models.Model):
     Requires a WBS Element and activity type (e.g. TG1021)
     Examples: Project XY - Unit 1
     '''
-    project_name = models.CharField(max_length=20, help_text='Project Name')
+    project_name = models.CharField(
+        max_length=20,
+        verbose_name='Project: Project Name',
+        help_text='Project Name'
+        )
     # FK to customer: zero or one to many or none
-    customer_id = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, default=None)
-    active = models.BooleanField(default=True, help_text='Is this Project still active?')
+    customer_id = models.ForeignKey(
+        Customer,
+        on_delete=models.SET_NULL,
+        null=True,
+        default=None,
+        related_name='projects'
+        )
+    active = models.BooleanField(
+        default=True,
+        verbose_name='Project: Active',
+        help_text='Is this Project still active?'
+        )
+    
+    class Meta:
+        verbose_name = 'project'
+        verbose_name_plural = 'projects'
 
     def __str__(self):
         return self.project_name
+    
+    def get_absolute_url(self):
+        return None
 
 
 class Element(models.Model):
@@ -67,19 +142,60 @@ class Element(models.Model):
     Holiday, Sickleave adresses cost via Cost Center and Activity
     '''
     # FK to group: zero or one to many or none
-    group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, default=None)
+    group = models.ForeignKey(
+        Group,
+        on_delete=models.SET_NULL,
+        null=True,
+        default=None,
+        related_name='elements'
+        )
     # FK to project: zero or one to many or none
-    project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True, default=None)
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.SET_NULL,
+        null=True,
+        default=None,
+        related_name='elements'
+        )
     # FK to tag: one and only one to many or none, CASCADE DELETE!!!
-    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    activity = models.ForeignKey(
+        Activity,
+        on_delete=models.CASCADE,
+        related_name='elements'
+        )
 
-    code_act_type = models.CharField(max_length=3, blank=True, null=True, help_text='Code to identify hourly rate (e.g. 012 in TG1012)')
-    
-    receiver_ccenter = models.CharField(max_length=5, null=True, default=None)
-    wbs_element = models.CharField(max_length=20, null=True, default=None)
-    receiver_order = models.IntegerField(null=True)
-    description = models.CharField(max_length=20)
-    tag = models.ForeignKey(Tag, on_delete=models.SET_NULL, null=True, default=None)
+    code_act_type = models.CharField(
+        max_length=3,
+        blank=True,
+        null=True,
+        verbose_name='Element: Activity Type Code',
+        help_text='Code to identify hourly rate (e.g. 012 in TG1012)',
+        )
+    receiver_ccenter = models.CharField(
+        max_length=5,
+        null=True,
+        default=None,
+        verbose_name='Element: Receiver Cost Center'
+        )
+    wbs_element = models.CharField(
+        max_length=20,
+        null=True,
+        default=None,
+        verbose_name='Element: WBS Element Name'
+        )
+    receiver_order = models.IntegerField(null=True, verbose_name='Elements: Receiver Order')
+    description = models.CharField(max_length=20, verbose_name='Elements: Description')
+    tag = models.ForeignKey(
+        Tag,
+         on_delete=models.SET_NULL,
+         null=True,
+         default=None,
+         related_name='elements'
+         )
+
+    class Meta:
+        verbose_name = 'element'
+        verbose_name_plural = 'elements'
 
     @property
     def activity_type(self):
@@ -96,6 +212,10 @@ class Element(models.Model):
         else:
             return None
     
+    def __str__(self):
+        return f'{self.receiver_ccenter}{self.wbs_element}'
 
+    def get_absolute_url(self):
+        return None
 
 
