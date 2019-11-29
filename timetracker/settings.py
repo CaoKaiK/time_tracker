@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'settings.apps.SettingsConfig',
     'tracker.apps.TrackerConfig',
     'dashboard.apps.DashboardConfig',
     'api.apps.ApiConfig',
