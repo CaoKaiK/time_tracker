@@ -32,8 +32,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'icons/all.min.css' %}">
 
     <!-- jQuery-->
-    <script src="{% static "js/jquery-3.4.1.js" %}"></script>
-    <script src="{% static "js/custom.js" %}"></script>
+    <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
 
 </head>
 
@@ -78,7 +78,7 @@
                         </a>
 
                         <a class="nav-link {% if "settings" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
-                        href="{% url 'settings' %}">
+                        href="{% url 'settings-personal' %}">
                         <i class="fas fa-user-cog fa-fw mr-2"></i>
                         <span>Settings</span>
                         </a>

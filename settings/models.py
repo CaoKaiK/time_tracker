@@ -1,4 +1,6 @@
 from django.db import models
+from django.core import validators
+
 
 class Activity(models.Model):
     '''
@@ -24,6 +26,7 @@ class Activity(models.Model):
     class Meta:
         verbose_name = 'activity'
         verbose_name_plural = 'activities'
+        ordering = ['activity_name']
 
     def __str__(self):
         return f'{self.activity_name}-{self.description}'
@@ -42,12 +45,14 @@ class Tag(models.Model):
     '''
     tag_name = models.CharField(
         max_length=20,
-        verbose_name='Tag: Tag Name',
+        unique=True,
+        verbose_name='Tag Name',
         help_text='Tag Name'
         )
     tag_hex = models.CharField(
         max_length=6, 
-        verbose_name='Tag: Hex Light',
+        validators=[validators.MinLengthValidator(6, message='Hex Color code must have exactly 6 characters')],
+        verbose_name='Tag Color Hex Light',
         help_text='Tag Color in Hex'
         )
 

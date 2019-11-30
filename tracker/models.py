@@ -22,21 +22,18 @@ class Customer(models.Model):
     city = models.CharField(
         max_length=50,
         blank=True,
-        null=True,
         verbose_name='Customer: City',
         help_text='Customer City'
         )
     street = models.CharField(
         max_length=50,
         blank=True,
-        null=True,
         verbose_name='Customer: Street',
         help_text='Customer Street'
         )
     postal = models.CharField(
         max_length=20,
         blank=True,
-        null=True,
         verbose_name='Customer: Postal',
         help_text='Customer Postal Code'
         )
@@ -137,9 +134,9 @@ class Element(models.Model):
     Vice versa if the Activity Type is available the Activity and hourly rate can be derived.
 
 
-    Project Work generally adresses cost via a WBS the Activity and the Activity Type
+    Project Work generally addresses cost via a WBS the Activity and the Activity Type
 
-    Holiday, Sickleave adresses cost via Cost Center and Activity
+    Holiday, Sickleave addresses cost via Cost Center and Activity
     '''
     # FK to group: zero or one to many or none
     group = models.ForeignKey(
@@ -167,19 +164,18 @@ class Element(models.Model):
     code_act_type = models.CharField(
         max_length=3,
         blank=True,
-        null=True,
         verbose_name='Element: Activity Type Code',
         help_text='Code to identify hourly rate (e.g. 012 in TG1012)',
         )
     receiver_ccenter = models.CharField(
         max_length=5,
-        null=True,
+        blank=True,
         default=None,
         verbose_name='Element: Receiver Cost Center'
         )
     wbs_element = models.CharField(
         max_length=20,
-        null=True,
+        blank=True,
         default=None,
         verbose_name='Element: WBS Element Name'
         )
@@ -196,6 +192,12 @@ class Element(models.Model):
     class Meta:
         verbose_name = 'element'
         verbose_name_plural = 'elements'
+    
+    def __str__(self):
+        return f'{self.receiver_ccenter}{self.wbs_element}'
+
+    def get_absolute_url(self):
+        return None
 
     @property
     def activity_type(self):
@@ -211,11 +213,4 @@ class Element(models.Model):
             return self.group.group_name # pylint: disable=maybe-no-member
         else:
             return None
-    
-    def __str__(self):
-        return f'{self.receiver_ccenter}{self.wbs_element}'
-
-    def get_absolute_url(self):
-        return None
-
 

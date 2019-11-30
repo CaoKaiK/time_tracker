@@ -1,0 +1,15 @@
+{% extends "settings/settings_base.html" %}
+{% load static %}
+
+
+{% block card-content %}
+
+<div class="card-body">
+        <form method="post">{% csrf_token %}
+                        {{formset.as_p}}
+                <input type="submit" value="Update Profile" class="button"/>
+        </form>
+</div>
+
+
+{% endblock card-content %}
