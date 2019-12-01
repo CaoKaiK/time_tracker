@@ -9,5 +9,8 @@ from settings.models import Activity, Tag
 class TagForm(ModelForm):
     class Meta:
         model = Tag
-        fields = '__all__'
+        fields = [
+            'tag_name',
+            'tag_hex'
+        ]
 

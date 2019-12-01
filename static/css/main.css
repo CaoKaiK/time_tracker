@@ -64,6 +64,8 @@
   margin-right: 0px;
 }
 
+
+
 .no-pad-tb {
   padding-bottom: 0px;
   padding-top: 0px;
@@ -85,4 +87,12 @@
 
 .vl {
   border-right: 0.1rem solid rgba(0,0,0,.1)
+}
+
+.simple-valid {
+  border-color: #96a51e;
+}
+
+.simple-invalid {
+  border-color: #eb780a;
 }

@@ -1,15 +1,79 @@
 {% extends "settings/settings_base.html" %}
 {% load static %}
+{% load widget_tweaks %}
 
 
 {% block card-content %}
-
 <div class="card-body">
-        <form method="post">{% csrf_token %}
-                        {{formset.as_p}}
-                <input type="submit" value="Update Profile" class="button"/>
-        </form>
-</div>
+    <form method="post">{% csrf_token %}
+        {{ formset.management_form }}
 
+
+
+        {% for form in formset %}
+
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="card shadow-sm card-sm mb-3">
+                <div class="card-header" style="background-color: #{{ form.tag_hex.value }};">
+                    <div class="form-group mb-0">                        
+                        {% if form.is_bound %}
+                            {% if form.tag_name.errors %}
+                                {% render_field form.tag_name class="form-control is-invalid" %}
+                                {% for error in form.tag_name.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.tag_name class="form-control simple-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.tag_name class="form-control" %}
+                        {% endif %}
+                    </div>
+                </div>
+                    
+                <div class="card-body no-pad-tb pt-3">
+                    <div class="form-group">
+                            {% if form.is_bound %}
+                                {% if form.tag_hex.errors %}
+                                    {% render_field form.tag_hex class="form-control is-invalid" %}
+                                    {% for error in form.tag_hex.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field form.tag_hex class="form-control simple-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.tag_hex class="form-control" %}
+                            {% endif %}
+
+                            {% if form.tag_hex.help_text %}
+                                <small class="form-text text-muted">{{ form.tag_hex.help_text }}</small>
+                            {% endif %}
+                        </div>
+                </div>
+                                    
+                
+
+            </div>
+        {% endfor %}
+
+        <input type="submit" value="Update Profile" class="button"/>
+    </form>
+</div>
 
 {% endblock card-content %}

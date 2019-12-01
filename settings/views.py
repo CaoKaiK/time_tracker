@@ -22,16 +22,20 @@ def manage_tags(request):
     elif request.method == 'POST':
 
         formset = TagModelFormSet(request.POST, request.FILES)
+
         
         if formset.is_valid():
             update_tags = []
             tag_id = 0
+            
             for form in formset:
+                print(form)
                 tag_name = form.cleaned_data.get('tag_name')
                 tag_hex = form.cleaned_data.get('tag_hex')
 
                 if tag_hex and tag_hex:
                     update_tags.append(Tag(id=tag_id,tag_name=tag_name, tag_hex=tag_hex))
+                    # keep primary keys static
                     tag_id +=1
 
             try:
@@ -44,7 +48,6 @@ def manage_tags(request):
                     messages.warning(request, 'Some error occured. Tags were restored')
 
             return redirect('settings-tags')
-
 
     return render(request, template_name, {'formset': formset})
 

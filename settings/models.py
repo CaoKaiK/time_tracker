@@ -45,16 +45,20 @@ class Tag(models.Model):
     '''
     tag_name = models.CharField(
         max_length=20,
-        unique=True,
         verbose_name='Tag Name',
         help_text='Tag Name'
         )
     tag_hex = models.CharField(
         max_length=6, 
-        validators=[validators.MinLengthValidator(6, message='Hex Color code must have exactly 6 characters')],
-        verbose_name='Tag Color Hex Light',
-        help_text='Tag Color in Hex'
+        validators=[
+            validators.MinLengthValidator(6, message='Hex Color code must have exactly 6 characters'),
+            validators.RegexValidator(regex='^([0-9a-fA-F]{6})$', message='No valid Hex Color code')
+        ],
+        verbose_name='Color:',
+        help_text='Tag Color in Hexadecimal'
         )
+
+        
 
     class Meta:
         verbose_name = 'tag'
