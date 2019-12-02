@@ -1,19 +1,53 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import (
+    ListView, 
+    DetailView, 
+    CreateView,
+    UpdateView, 
+    DeleteView
+)
 
 from django.contrib.messages.views import SuccessMessageMixin
 
-
-from .models import Project, Element
+from tracker.forms import GroupForm
+from tracker.models import Group, Project, Element
 
 
 def home(request):
     return render(request, 'tracker/home.html')
 
-# class ProjectListView(ListView):
-#     model = Project
+
+class GroupListView(ListView):
+    model = Group
+
+class GroupDetailView(DetailView):
+    model = Group
+
+
+class GroupCreateView(SuccessMessageMixin, CreateView):
+    form_class = GroupForm
+    template_name = 'tracker/group_form.html'
+    success_message = 'Group %(group_name)s was created'
+
+    def get_success_url(self):
+        return reverse('group-list')
+
+class GroupUpdateView(SuccessMessageMixin, UpdateView):
+    model = Group
+    form_class = GroupForm
+    template_name = 'tracker/group_form.html'
+    success_message = 'Group %(group_name)s was updated'
+
+
+    def get_success_url(self):
+        return reverse('group-list')
+    
+
+
+class ProjectListView(ListView):
+    model = Project
         
 # class ProjectDetailView(DetailView):
 #     model = Project

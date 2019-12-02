@@ -59,10 +59,10 @@
                             <span>Time Entries</span>
                         </a>
 
-                        <a class="nav-link {% if "projects" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
-                            href="#">
+                        <a class="nav-link {% if "group" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
+                            href="{% url 'group-list' %}">
                             <i class="fas fa-project-diagram fa-fw mr-2"></i>
-                            <span>Projects</span>
+                            <span>Element Groups</span>
                         </a>
 
                         <a class="nav-link {% if "dash" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"

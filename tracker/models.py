@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from datetime import datetime, timedelta
 
@@ -11,30 +12,30 @@ class Customer(models.Model):
     '''
     customer_name = models.CharField(
         max_length=50,
-        verbose_name='Customer: Customer Name',
+        verbose_name='Customer Name',
         help_text='Customer Name'
         )
     country = models.CharField(
         max_length=50,
-        verbose_name='Customer: Country',
+        verbose_name='Country',
         help_text='Customer Country'
         )
     city = models.CharField(
         max_length=50,
         blank=True,
-        verbose_name='Customer: City',
+        verbose_name='City',
         help_text='Customer City'
         )
     street = models.CharField(
         max_length=50,
         blank=True,
-        verbose_name='Customer: Street',
+        verbose_name='Street',
         help_text='Customer Street'
         )
     postal = models.CharField(
         max_length=20,
         blank=True,
-        verbose_name='Customer: Postal',
+        verbose_name='Postal',
         help_text='Customer Postal Code'
         )
 
@@ -50,28 +51,41 @@ class Customer(models.Model):
 
 class Group(models.Model):
     '''
-    Group Model - for activity types that don't fall under project-related work.
-    No WBS available or combination of receiver cost center, receiver order
-    Examples: TG3, TG4, TG5, TG7 ...
+    Group Model - groups elements into Element Groups
     '''
+    # rows for order in Group List
+    ROW1 = 1
+    ROW2 = 2
+    ROW3 = 3
+    ROW_CHOICES = [
+        (ROW1, 'Row 1'),
+        (ROW2, 'Row 2'),
+        (ROW2, 'Row 3',)
+    ]
+
     group_name = models.CharField(
-        max_length=20,
-        verbose_name='Group: Group Name',
-        help_text='Activity Group Name'
+        max_length = 20,
+        verbose_name = 'Group Name',
+        help_text = 'Element Group Name'
         )
     # FK to customer: zero or one to many or none
     customer_id = models.ForeignKey(
         Customer,
-        on_delete=models.SET_NULL,
-        null=True,
-        default=None,
-        related_name='groups'
+        on_delete = models.SET_NULL,
+        blank = True,
+        null = True,
+        default = None,
+        related_name = 'groups',
+        verbose_name = 'Customer Name',
+        help_text = 'Customer'
         )
     active = models.BooleanField(
-        default=True, 
-        verbose_name='Group: Active',
-        help_text='Is this Activity Group still active?'
+        default = True, 
+        verbose_name = 'Active',
+        help_text = 'Is this Element Group still active?'
         )
+    row = models.IntegerField(choices=ROW_CHOICES, default=ROW1)
+    
 
     class Meta:
         verbose_name = 'group'
@@ -81,7 +95,9 @@ class Group(models.Model):
         return self.group_name
 
     def get_absolute_url(self):
-        return None
+        return reverse('group-list')
+    
+
 
 class Project(models.Model):
     '''
@@ -91,7 +107,7 @@ class Project(models.Model):
     '''
     project_name = models.CharField(
         max_length=20,
-        verbose_name='Project: Project Name',
+        verbose_name='Project Name',
         help_text='Project Name'
         )
     # FK to customer: zero or one to many or none
@@ -104,7 +120,7 @@ class Project(models.Model):
         )
     active = models.BooleanField(
         default=True,
-        verbose_name='Project: Active',
+        verbose_name='Active',
         help_text='Is this Project still active?'
         )
     
@@ -117,7 +133,6 @@ class Project(models.Model):
     
     def get_absolute_url(self):
         return None
-
 
 class Element(models.Model):
     '''
@@ -154,33 +169,35 @@ class Element(models.Model):
         default=None,
         related_name='elements'
         )
-    # FK to tag: one and only one to many or none, CASCADE DELETE!!!
+    # FK to tag: tero or one to many or none
     activity = models.ForeignKey(
         Activity,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
+        default=None,
         related_name='elements'
         )
 
     code_act_type = models.CharField(
         max_length=3,
         blank=True,
-        verbose_name='Element: Activity Type Code',
+        verbose_name='Activity Type Code',
         help_text='Code to identify hourly rate (e.g. 012 in TG1012)',
         )
     receiver_ccenter = models.CharField(
         max_length=5,
         blank=True,
         default=None,
-        verbose_name='Element: Receiver Cost Center'
+        verbose_name='Receiver Cost Center'
         )
     wbs_element = models.CharField(
         max_length=20,
         blank=True,
         default=None,
-        verbose_name='Element: WBS Element Name'
+        verbose_name='WBS Element Name'
         )
-    receiver_order = models.IntegerField(null=True, verbose_name='Elements: Receiver Order')
-    description = models.CharField(max_length=20, verbose_name='Elements: Description')
+    receiver_order = models.IntegerField(null=True, verbose_name='Receiver Order')
+    description = models.CharField(max_length=20, verbose_name='Description')
     tag = models.ForeignKey(
         Tag,
          on_delete=models.SET_NULL,

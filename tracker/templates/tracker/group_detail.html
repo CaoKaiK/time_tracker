@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-sm mb-3">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a href="#" class="nav-link active">Group</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link card-nav-link"><i class="fas fa-edit mr-1"></i>Edit</a>
+            </li>
+            <li class="nav-item ml-auto">
+                <a href="#" class="btn btn-siemens-yellow-dark"><i
+                        class="fas fa-trash-alt mr-2"></i>Delete</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card-body">
+        <div class="container-fluid no-pad">
+            <div class="row">
+                <div class="col-md-8 vl">
+                    <h5 class="card-title"> {{ object.group_name }}
+                        {% if object.active == True %}
+                        <span class="badge badge-siemens-green ml-3">Active</span>
+                        {% else %}
+                        <span class="badge badge-siemens-yellow-dark ml-3">Inactive</span>
+                        {% endif %}
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Country</h6>
+                    <hr>
+                    <!--
+                    <ul class="nav">
+                        <li class="card-subtitle mb-2 text-muted mr-3">
+                            Created on: {{ object.created_date | date:"Y-m-d H:i"}}
+                        </li>
+                        <li class="card-subtitle mb-2 text-muted">
+                            Last modified on: {{ object.modified_date | date:"Y-m-d H:i"}}
+                        </li>
+                    </ul>-->
+                </div>
+                <div class="col-md-4">
+                    <h6 class="card-subtitle mb-2 text-muted">Customer:</h6>
+                    <h5 class="card-title">Customer</h5>
+                    
+                    <p class="card-text">
+                                Street<br>
+                                Postal<br>
+                                City, Country
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- <h5 class="card-title">WBS-Elements: <a class="btn btn-secondary ml-4" href="{% url 'projects-element-create' pk=project.id %}" role="button"><i
+            class="fas fa-plus-square mr-2"></i>Add WBS</a> </h5>
+        
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Status</th>
+                    <th scope="col">WBS-Element</th>
+                    <th scope="col">Activity</th>
+                    <th scope="col">Activity Type</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Entries</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in elements %}
+                <tr>
+                    <td>
+                        {% if element.active == True %}
+                        <span class="badge badge-siemens-green">Active</span>
+                        {% else %}
+                        <span class="badge badge-siemens-yellow-dark">Inactive</span>
+                        {% endif %}
+                    </th>
+                    <td>
+                        <a href="{% url 'projects-element-detail' pk_pro=project.id pk=element.id %}">
+                            {{element.element}}
+                        </a>
+                    </td>
+                    <td>{{element.act}}</td>
+                    <td>{{element.act_type}}</td>
+                    <td>{{element.act_description}}</td>
+                    <td><a href="{% url 'projects-element-detail' pk_pro=project.id pk=element.id %}" class="badge badge-primary">{{element.get_subfeature_entries.count}}</a></span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> -->
+    </div>
+</div>
+
+{% endblock content %}

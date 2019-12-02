@@ -51,14 +51,11 @@ class Tag(models.Model):
     tag_hex = models.CharField(
         max_length=6, 
         validators=[
-            validators.MinLengthValidator(6, message='Hex Color code must have exactly 6 characters'),
             validators.RegexValidator(regex='^([0-9a-fA-F]{6})$', message='No valid Hex Color code')
         ],
         verbose_name='Color:',
         help_text='Tag Color in Hexadecimal'
         )
-
-        
 
     class Meta:
         verbose_name = 'tag'
