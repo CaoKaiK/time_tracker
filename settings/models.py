@@ -66,3 +66,17 @@ class Tag(models.Model):
 
     def get_absolute_url(self):
         return None
+
+    @property
+    def light_hex(self):
+        return f'#{self.tag_hex}'
+
+    @property
+    def dark_hex(self):
+        import matplotlib.colors as mc
+        import colorsys
+        amount = 0.8 #darken color
+        c = f'#{self.tag_hex}'
+        c = colorsys.rgb_to_hls(*mc.to_rgb(c))
+        c_dark = colorsys.hls_to_rgb(c[0], max(0, min(1, amount * c[1])), c[2])
+        return c_dark

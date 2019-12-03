@@ -3,52 +3,84 @@
 {% block card-content %}
 
 
-    <div class="card-body">
-        <div class="container-fluid no-pad">
-            <div class="row">
-                <div class="col-md-8 vl">
-                    <h5 class="card-title"> {{ group.group_name }}
-                        {% if group.active == True %}
-                            <span class="badge badge-siemens-green ml-3">Active</span>
-                        {% else %}
-                            <span class="badge badge-siemens-yellow-dark ml-3">Inactive</span>
-                        {% endif %}
-                    </h5>
-                    {% if group.customer %}
-                        <h6 class="card-subtitle mb-2 text-muted">{{ group.customer.country }}</h6>                    
-                    {% endif %}
-                    <hr>
-                    <ul class="nav">
-                        <li class="card-subtitle mb-2 text-muted mr-3">
-                            Created on: {{ group.created_date | date:"Y-m-d H:i"}}
-                        </li>
-                        <li class="card-subtitle mb-2 text-muted">
-                            Last modified on: {{ group.modified_date | date:"Y-m-d H:i"}}
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h6 class="card-subtitle mb-2 text-muted">Customer:</h6>
-                    {% if group.customer %}
-                        <h5 class="card-title">{{ group.customer }}</h5>
-                        
-                        <p class="card-text">
-                                    {{ group.customer.street }}<br>
-                                    {{ group.customer.postal }}<br>
-                                    {{ group.customer.city }}, {{ group.customer.country }}
-                        </p>
+<div class="card-body">
+    <div class="container-fluid no-pad">
+        <div class="row">
+            <div class="col-md-8 vl">
+                <h5 class="card-title"> {{ group.group_name }}
+                    {% if group.active == True %}
+                    <span class="badge badge-siemens-green ml-3">Active</span>
                     {% else %}
-                        <h5 class="card-title">No Customer asssigned</h5>
+                    <span class="badge badge-siemens-yellow-dark ml-3">Inactive</span>
                     {% endif %}
-                </div>
+                </h5>
+                {% if group.customer %}
+                <h6 class="card-subtitle mb-2 text-muted">{{ group.customer.country }}</h6>                    
+                {% endif %}
+                <hr>
+                <ul class="nav">
+                    <li class="card-subtitle mb-2 text-muted mr-3">
+                        Created on: {{ group.created_date | date:"Y-m-d H:i"}}
+                    </li>
+                    <li class="card-subtitle mb-2 text-muted">
+                        Last modified on: {{ group.modified_date | date:"Y-m-d H:i"}}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h6 class="card-subtitle mb-2 text-muted">Customer:</h6>
+                {% if group.customer %}
+                <h5 class="card-title">{{ group.customer }}</h5>
+                
+                <p class="card-text">
+                    {{ group.customer.street }}<br>
+                    {{ group.customer.postal }}<br>
+                    {{ group.customer.city }}, {{ group.customer.country }}
+                </p>
+                {% else %}
+                <h5 class="card-title">No Customer asssigned</h5>
+                {% endif %}
             </div>
         </div>
-
-        <h5 class="card-title">Elements: <a class="btn btn-secondary ml-4" href="{% url 'group-element-create' pk_group=group.id %}" role="button"><i
-            class="fas fa-plus-square mr-2"></i>Add WBS</a> </h5>
-
-
     </div>
-
-
-{% endblock card-content %}
+    
+    <h5 class="card-title">Elements: <a class="btn btn-secondary ml-4" href="{% url 'group-element-create' pk_group=group.id %}" role="button"><i
+        class="fas fa-plus-square mr-2"></i>Add WBS</a> </h5>
+        
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Status</th>
+                    <th scope="col">Element</th>
+                    <th scope="col">Activity</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Entries</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for element in group.elements.all %}
+                <tr>
+                    <td>
+                        {% if element.active == True %}
+                        <span class="badge badge-siemens-green">Active</span>
+                        {% else %}
+                        <span class="badge badge-siemens-yellow-dark">Inactive</span>
+                        {% endif %}
+                    </th>
+                    <td>
+                        <a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}">
+                            {{element.wbs_element}}
+                        </a>
+                    </td>
+                    <td>{{element.activity}}</td>
+                    <td>{{element.description}}</td>
+                    <td><a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}" class="badge badge-primary">{{element.get_subfeature_entries.count}}</a></span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+    
+    
+    {% endblock card-content %}

@@ -17,11 +17,14 @@
                 <a href="{% url 'group-detail' pk=group.id %}" class="card-title-link">
                     <h5 class="card-title">{{ group.group_name }}</h5>
                 </a>
-                <h6 class="card-subtitle mb-2 text-muted">Country</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ group.customer.country }}</h6>
                 
-                {% for element in project.get_subfeature_elements %}
-                <a href="#"
-                class="badge badge-secondary">{{ element.element }} | {{ element.act_description}}</a>
+                {% for element in group.elements.all %}
+                    {% if element.tag %}
+                        <a href="#" class="badge badge-secondary" style="background-color: {{ element.tag.light_hex }};">{{ element }}</a>
+                    {% else%}
+                        <a href="#" class="badge badge-secondary">{{ element }}</a>
+                    {% endif %}
                 {% endfor%}
             </div>
             <div class="card-footer text-muted">
