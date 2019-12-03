@@ -69,14 +69,14 @@ class Group(models.Model):
         help_text = 'Element Group Name'
         )
     # FK to customer: zero or one to many or none
-    customer_id = models.ForeignKey(
+    customer = models.ForeignKey(
         Customer,
         on_delete = models.SET_NULL,
         blank = True,
         null = True,
         default = None,
-        related_name = 'groups',
         verbose_name = 'Customer Name',
+        related_name = 'groups',
         help_text = 'Customer'
         )
     active = models.BooleanField(

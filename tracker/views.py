@@ -12,7 +12,7 @@ from django.views.generic import (
 
 from django.contrib.messages.views import SuccessMessageMixin
 
-from tracker.models import Group, Element
+from tracker.models import Customer, Group, Element
 
 
 def home(request):
@@ -23,7 +23,7 @@ class GroupListView(ListView):
     model = Group
 
 class GroupDetailView(DetailView):
-    model = Group
+    model = Group    
 
 class GroupCreateView(SuccessMessageMixin, CreateView):
     model = Group
