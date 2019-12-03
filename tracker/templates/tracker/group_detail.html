@@ -51,8 +51,11 @@
             <thead>
                 <tr>
                     <th scope="col">Status</th>
-                    <th scope="col">Element</th>
                     <th scope="col">Activity</th>
+                    <th scope="col">Activity Type</th>
+                    <th scope="col">Receiver CCenter</th>
+                    <th scope="col">Element</th>
+                    <th scope="col">Receiver Order</th>              
                     <th scope="col">Description</th>
                     <th scope="col">Entries</th>
                 </tr>
@@ -66,15 +69,18 @@
                         {% else %}
                         <span class="badge badge-siemens-yellow-dark">Inactive</span>
                         {% endif %}
-                    </th>
+                    </td>
+                    <td>{{ element.activity.activity_name }}</td>
+                    <td>{{ element.activity_type }}</td>
+                    <td>{{ element.receiver_ccenter }}</td>
                     <td>
                         <a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}">
-                            {{element.wbs_element}}
+                            {{ element.wbs_element }}
                         </a>
                     </td>
-                    <td>{{element.activity}}</td>
-                    <td>{{element.description}}</td>
-                    <td><a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}" class="badge badge-primary">{{element.get_subfeature_entries.count}}</a></span></td>
+                    <td>{{ element.receiver_order }}</td>
+                    <td>{{ element.description }}</td>
+                    <td><a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}" class="badge badge-primary">{{element.entries.all.count}}</a></span></td>
                 </tr>
                 {% endfor %}
             </tbody>

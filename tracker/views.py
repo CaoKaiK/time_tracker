@@ -62,7 +62,16 @@ class ElementCreateView(SuccessMessageMixin, CreateView):
     def get_success_url(self):
         return reverse('group-detail', kwargs={'pk': self.object.group.id})    
 
-
+class ElementDeleteView(DeleteView):
+    model = Element
+    #success_url = reverse_lazy('projects-detail')
+    success_message = "Element was deleted"
+    
+    def delete(self, request, *args, **kwargs):
+        messages.warning(self.request, self.success_message)
+        return super(ElementDeleteView, self).delete(request, *args, **kwargs)
+    def get_success_url(self):
+        return reverse('group-detail', kwargs={'pk': self.object.group.id})
 
         
 # class ProjectDetailView(DetailView):

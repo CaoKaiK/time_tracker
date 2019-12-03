@@ -45,6 +45,13 @@
                     </a>
                 {% endif %}
             </li>
+            
+            {% if element %}
+            <li class="nav-item ml-auto">
+                    <a href="{% url 'group-element-delete' pk_group=element.group.id pk=element.id %}" class="btn btn-siemens-yellow-dark"><i
+                            class="fas fa-trash-alt mr-2"></i>Delete</a>
+            </li>
+            {% endif %}
 
         </ul>
     </div>
