@@ -1,39 +1,35 @@
 {% extends "base.html" %}
-
 {% load static %}
 
 {% block content %}
 
-<div class="card shadow-sm card-sm mb-3">
-    <div class="card-body">
-        <a href="{% url 'group-create' %}" class="card-title-link align-middle">
-            <h5 class="card-title "><i class="fas fa-plus-square mr-3" style="color: gray;"></i>Create Element Group</h5>
-        </a>
+    <div class="card shadow-sm card-sm mb-3">
+        <div class="card-body">
+            <a href="{% url 'group-create' %}" class="card-title-link align-middle">
+                <h5 class="card-title "><i class="fas fa-plus-square mr-3" style="color: gray;"></i>Create Element Group</h5>
+            </a>
+        </div>
     </div>
-</div>
 
+    {% for group in object_list %}
+        <div class="card shadow-sm card-sm mb-3">
+            <div class="card-body">
+                <a href="{% url 'group-detail' pk=group.id %}" class="card-title-link">
+                    <h5 class="card-title">{{ group.group_name }}</h5>
+                </a>
+                <h6 class="card-subtitle mb-2 text-muted">Country</h6>
+                
+                {% for element in project.get_subfeature_elements %}
+                <a href="#"
+                class="badge badge-secondary">{{ element.element }} | {{ element.act_description}}</a>
+                {% endfor%}
+            </div>
+            <div class="card-footer text-muted">
+                <a href="#" class="badge badge-secondary"><i class="fas fa-plus-square mr-1"></i>Add Element</a>
+                <a href="{% url 'group-update' pk=group.id %}" class="badge badge-secondary"><i class="fas fa-edit mr-1"></i>Edit Group</a>
+                
+            </div>
+        </div>
+    {% endfor %}
 
-
-{% for group in object_list %}
-
-<div class="card shadow-sm card-sm mb-3">
-    <div class="card-body">
-        <a href="#" class="card-title-link">
-            <h5 class="card-title">{{ group.group_name }}</h5>
-        </a>
-        <h6 class="card-subtitle mb-2 text-muted">Country</h6>
-        
-        {% for element in project.get_subfeature_elements %}
-        <a href="#"
-            class="badge badge-secondary">{{ element.element }} | {{ element.act_description}}</a>
-        {% endfor%}
-    </div>
-    <div class="card-footer text-muted">
-        <a href="#" class="badge badge-secondary"><i class="fas fa-plus-square mr-1"></i>Add Element</a>
-        <a href="#" class="badge badge-secondary"><i class="fas fa-edit mr-1"></i>Edit Group</a>
-        
-    </div>
-</div>
-
-{% endfor %}
 {% endblock content %}

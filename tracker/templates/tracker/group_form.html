@@ -1,77 +1,54 @@
-{% extends "settings/settings_base.html" %}
+{% extends "tracker/group_base.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
-{% block content %}
+{% block card-content %}
 
-<div class="card mb-3">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                    {% if group %}
-                    <a href="{% url 'group-detail' pk=group.id %}" class="nav-link card-nav-link">{{ group.group_name }}</a>
-                    {% else %}
-                    <a href="{% url 'group-list' %}" class="nav-link card-nav-link">Back to Group List</a>
-                    {% endif %}
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link active"><i class="fas fa-edit mr-2"></i>Edit</a>
-                </li>
-                <li class="nav-item ml-auto">
-                    {% if group %}
-                    <a href="#" class="btn btn-siemens-yellow-dark">
-                    {% else%}
-                    <a href="#" class="btn btn-siemens-yellow-dark">
-                    {% endif %}
-                    <i class="fas fa-trash-alt mr-2"></i>Delete</a>
-                </li>
-    
-            </ul>
+
+<div class="card-body">
+    <form method="post">{% csrf_token %}
+
+        {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
         </div>
-        <div class="card-body">
-            <form method="post">{% csrf_token %}
+        {% endif %}
 
-                {% for hidden_field in form.hidden_fields %}
-                    {{ hidden_field }}
-                {% endfor %}
+        {% for field in form.visible_fields %}
+        <div class="form-group">
+            {{ field.label_tag }}
 
-                {% if form.non_field_errors %}
-                    <div class="alert alert-danger" role="alert">
-                        {% for error in form.non_field_errors %}
-                            {{ error }}
-                        {% endfor %}
+            {% if form.is_bound %}
+                {% if field.errors %}
+                    {% render_field field class="form-control is-invalid" %}
+                    {% for error in field.erros %}
+                    <div class="invalid-feedback">
+                        {{ error }}
                     </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field field class="form-control simple-valid" %}
                 {% endif %}
+            {% else %}
+                {% render_field field class="form-control" %}
+            {% endif %}
 
-                {% for field in form.visible_fields %}
-                <div class="form-group">
-                    {{ field.label_tag }}
-
-                    {% if form.is_bound %}
-                        {% if field.errors %}
-                            {% render_field field class="form-control is-invalid" %}
-                            {% for error in field.erros %}
-                                <div class="invalid-feedback">
-                                    {{ error }}
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            {% render_field field class="form-control simple-valid" %}
-                        {% endif %}
-                    {% else %}
-                        {% render_field field class="form-control" %}
-                    {% endif %}
-
-                    {% if field.help_text %}
-                        <small class="form-text text-muted">{{ field.help_text }}</small>
-                    {% endif %}
-                </div>
-                {% endfor %}
-
-                <button type="submit" class="btn btn-siemens-green"> Update </button>
-
-            </form>
+            {% if field.help_text %}
+                <small class="form-text text-muted">{{ field.help_text }}</small>
+            {% endif %}
         </div>
-    </div>
+        {% endfor %}
 
-{% endblock content %}
+        <button type="submit" class="btn btn-siemens-green"> Update </button>
+
+    </form>
+</div>
+
+
+{% endblock card-content %}

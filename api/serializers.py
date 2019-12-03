@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from settings.models import Activity, Tag
-from tracker.models import Customer, Group, Project
+from tracker.models import Customer, Group, Element
 
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -22,11 +22,4 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
             'tag_hex',
         ]
 
-class ProjectSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Project
-        fields = [
-            'project_name',
-            'active',
-        ]
 

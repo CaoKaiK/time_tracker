@@ -5,12 +5,11 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 
 from settings.models import Activity, Tag
-from tracker.models import Project
+from tracker.models import Customer, Group, Element
 
 from .serializers import (
     ActivitySerializer,
     TagSerializer,
-    ProjectSerializer
     )
 
 
@@ -25,7 +24,4 @@ class TagViewSet(viewsets.ModelViewSet):
     serializer_class = TagSerializer
 
 
-class ProjectViewSet(viewsets.ModelViewSet):
-    queryset = Project.objects.all() # pylint: disable=maybe-no-member
-    serializer_class = ProjectSerializer
 

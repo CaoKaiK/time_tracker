@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
+
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -11,8 +12,7 @@ from django.views.generic import (
 
 from django.contrib.messages.views import SuccessMessageMixin
 
-from tracker.forms import GroupForm
-from tracker.models import Group, Project, Element
+from tracker.models import Group, Element
 
 
 def home(request):
@@ -25,10 +25,9 @@ class GroupListView(ListView):
 class GroupDetailView(DetailView):
     model = Group
 
-
 class GroupCreateView(SuccessMessageMixin, CreateView):
-    form_class = GroupForm
-    template_name = 'tracker/group_form.html'
+    model = Group
+    fields = '__all__'
     success_message = 'Group %(group_name)s was created'
 
     def get_success_url(self):
@@ -36,18 +35,28 @@ class GroupCreateView(SuccessMessageMixin, CreateView):
 
 class GroupUpdateView(SuccessMessageMixin, UpdateView):
     model = Group
-    form_class = GroupForm
-    template_name = 'tracker/group_form.html'
+    fields = '__all__'
     success_message = 'Group %(group_name)s was updated'
 
-
     def get_success_url(self):
-        return reverse('group-list')
+        return reverse('group-detail', kwargs={'pk': self.object.id})
+
+class GroupDeleteView(DeleteView):
+    model = Group
+    success_url = reverse_lazy('group-list')
+    success_message = 'Group was deleted'
+    
+    def delete(self, request, *args, **kwargs):
+        messages.warning(self.request, self.success_message)
+        return super(GroupDeleteView, self).delete(request, *args, **kwargs)
+
+class ElementCreateView(SuccessMessageMixin, CreateView):
+    model = Element
+    fields = '__all__'
     
 
 
-class ProjectListView(ListView):
-    model = Project
+
         
 # class ProjectDetailView(DetailView):
 #     model = Project

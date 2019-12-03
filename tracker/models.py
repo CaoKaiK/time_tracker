@@ -8,7 +8,7 @@ from settings.models import Activity, Tag
 
 class Customer(models.Model):
     '''
-    Customer Model - can be attributed to Group or Project
+    Customer Model - can be attributed to Group
     '''
     customer_name = models.CharField(
         max_length=50,
@@ -47,7 +47,7 @@ class Customer(models.Model):
         return self.customer_name
 
     def get_absolute_url(self):
-        return None
+        return reverse('group-list')
 
 class Group(models.Model):
     '''
@@ -86,6 +86,8 @@ class Group(models.Model):
         )
     row = models.IntegerField(choices=ROW_CHOICES, default=ROW1)
     
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = 'group'
@@ -96,43 +98,9 @@ class Group(models.Model):
 
     def get_absolute_url(self):
         return reverse('group-list')
+
     
 
-
-class Project(models.Model):
-    '''
-    Project Model - for activity that can be linked to a Project.
-    Requires a WBS Element and activity type (e.g. TG1021)
-    Examples: Project XY - Unit 1
-    '''
-    project_name = models.CharField(
-        max_length=20,
-        verbose_name='Project Name',
-        help_text='Project Name'
-        )
-    # FK to customer: zero or one to many or none
-    customer_id = models.ForeignKey(
-        Customer,
-        on_delete=models.SET_NULL,
-        null=True,
-        default=None,
-        related_name='projects'
-        )
-    active = models.BooleanField(
-        default=True,
-        verbose_name='Active',
-        help_text='Is this Project still active?'
-        )
-    
-    class Meta:
-        verbose_name = 'project'
-        verbose_name_plural = 'projects'
-
-    def __str__(self):
-        return self.project_name
-    
-    def get_absolute_url(self):
-        return None
 
 class Element(models.Model):
     '''
@@ -156,14 +124,6 @@ class Element(models.Model):
     # FK to group: zero or one to many or none
     group = models.ForeignKey(
         Group,
-        on_delete=models.SET_NULL,
-        null=True,
-        default=None,
-        related_name='elements'
-        )
-    # FK to project: zero or one to many or none
-    project = models.ForeignKey(
-        Project,
         on_delete=models.SET_NULL,
         null=True,
         default=None,
@@ -201,6 +161,7 @@ class Element(models.Model):
     tag = models.ForeignKey(
         Tag,
          on_delete=models.SET_NULL,
+         blank=True,
          null=True,
          default=None,
          related_name='elements'
