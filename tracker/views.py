@@ -21,6 +21,7 @@ def home(request):
 
 class GroupListView(ListView):
     model = Group
+    ordering = ['-modified_date']
 
 class GroupDetailView(DetailView):
     model = Group    
@@ -50,10 +51,16 @@ class GroupDeleteView(DeleteView):
         messages.warning(self.request, self.success_message)
         return super(GroupDeleteView, self).delete(request, *args, **kwargs)
 
+class ElementDetailView(DetailView):
+    model = Element
+
 class ElementCreateView(SuccessMessageMixin, CreateView):
     model = Element
     fields = '__all__'
-    
+    success_message = 'Element was created'
+
+    def get_success_url(self):
+        return reverse('group-detail', kwargs={'pk': self.object.group.id})    
 
 
 

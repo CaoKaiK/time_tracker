@@ -29,7 +29,7 @@ class Activity(models.Model):
         ordering = ['activity_name']
 
     def __str__(self):
-        return f'{self.activity_name}-{self.description}'
+        return f'{self.activity_name} - {self.description}'
 
     def get_absolute_url(self):
         return None

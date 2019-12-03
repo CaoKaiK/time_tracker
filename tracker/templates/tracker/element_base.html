@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-sm mb-3">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+
+            <li class="nav-item">
+                {% if element %}
+                <a href="{% url 'group-detail' pk=element.group.id %}"
+                    class="nav-link card-nav-link"><i class="fas fa-caret-square-left mr-2"></i>{{ element.group.group_name }}
+                </a>
+                {% else %}
+                <a href="{% url 'group-list' %}"
+                    class="nav-link card-nav-link"><i class="fas fa-caret-square-left mr-2"></i>Group List
+                </a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if "create" in request.resolver_match.url_name or "update" in request.resolver_match.url_name %}
+                    {% if element %}
+                        <a href="{% url 'element-detail' pk=element.id %}"
+                            class="nav-link card-nav-link"><i class="fas fa-caret-square-left mr-2"></i>{{ element }}
+                        </a>
+                    {% else %}
+                        <a href=""
+                            class="nav-link card-nav-link">Element
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <a href=""
+                        class="nav-link active">Element
+                    </a>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                {% if "create" in request.resolver_match.url_name or "update" in request.resolver_match.url_name %}
+                    <a href="#" 
+                        class="nav-link active"><i class="fas fa-edit mr-2"></i>Edit
+                    </a>
+                {% else %}
+                    <a href="{% url 'group-update' pk=element.group.id %}" 
+                        class="nav-link card-nav-link"><i class="fas fa-edit mr-2"></i>Edit
+                    </a>
+                {% endif %}
+            </li>
+
+        </ul>
+    </div>
+
+    {% block card-content %}
+    {% endblock card-content %}
+</div>
+
+{% endblock content %}

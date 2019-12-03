@@ -6,6 +6,7 @@ from .views import (
     GroupCreateView,
     GroupUpdateView,
     GroupDeleteView,
+    ElementDetailView,
     ElementCreateView,
 
     )
@@ -21,9 +22,14 @@ urlpatterns = [
             path('update/', GroupUpdateView.as_view(), name='group-update'),
             path('delete/', GroupDeleteView.as_view(), name='group-delete'),
         ])),
-        path('<int:pk_group>/element/', include([
-            path('create/', ElementCreateView.as_view(), name='group-element-create')
-        ]))
+        path('<int:pk_group>/element/', include([            
+            path('create/', ElementCreateView.as_view(), name='group-element-create'),
+            path('<int:pk>', include([
+                path('', ElementDetailView.as_view(), name='group-element-detail'),
+
+            ])),
+             
+        ])),
     ])),
 
     #path('projects/', ProjectListView.as_view(), name='projects-list'),

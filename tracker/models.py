@@ -98,9 +98,8 @@ class Group(models.Model):
 
     def get_absolute_url(self):
         return reverse('group-list')
-
     
-
+    
 
 class Element(models.Model):
     '''
@@ -156,7 +155,7 @@ class Element(models.Model):
         default=None,
         verbose_name='WBS Element Name'
         )
-    receiver_order = models.IntegerField(null=True, verbose_name='Receiver Order')
+    receiver_order = models.IntegerField(null=True, blank=True, verbose_name='Receiver Order')
     description = models.CharField(max_length=20, verbose_name='Description')
     tag = models.ForeignKey(
         Tag,
@@ -166,13 +165,18 @@ class Element(models.Model):
          default=None,
          related_name='elements'
          )
+    active = models.BooleanField(
+        default = True, 
+        verbose_name = 'Active',
+        help_text = 'Is this Element still active?'
+        )
 
     class Meta:
         verbose_name = 'element'
         verbose_name_plural = 'elements'
     
     def __str__(self):
-        return f'{self.receiver_ccenter}{self.wbs_element}'
+        return f'{self.receiver_ccenter} | {self.wbs_element} | {self.description}'
 
     def get_absolute_url(self):
         return None
@@ -185,9 +189,7 @@ class Element(models.Model):
             return None
     @property
     def project_or_group_name(self):
-        if self.project is not None:
-            return self.project.project_name # pylint: disable=maybe-no-member
-        elif self.group is not None:
+        if self.group is not None:
             return self.group.group_name # pylint: disable=maybe-no-member
         else:
             return None
