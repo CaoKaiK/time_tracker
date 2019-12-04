@@ -40,7 +40,7 @@
                         class="nav-link active"><i class="fas fa-edit mr-2"></i>Edit
                     </a>
                 {% else %}
-                    <a href="{% url 'group-update' pk=element.group.id %}" 
+                    <a href="{% url 'group-element-update' pk_group=element.group.id pk=element.id %}" 
                         class="nav-link card-nav-link"><i class="fas fa-edit mr-2"></i>Edit
                     </a>
                 {% endif %}

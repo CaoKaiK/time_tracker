@@ -60,7 +60,15 @@ class ElementCreateView(SuccessMessageMixin, CreateView):
     success_message = 'Element was created'
 
     def get_success_url(self):
-        return reverse('group-detail', kwargs={'pk': self.object.group.id})    
+        return reverse('group-detail', kwargs={'pk': self.object.group.id})
+
+class ElementUpdateView(SuccessMessageMixin, UpdateView):
+    model = Element
+    fields = '__all__'
+    success_message = 'Element was updated'
+
+    def get_success_url(self):
+        return reverse('group-element-detail', kwargs={'pk_group': self.object.group.id, 'pk': self.object.id})    
 
 class ElementDeleteView(DeleteView):
     model = Element
