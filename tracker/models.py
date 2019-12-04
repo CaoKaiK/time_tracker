@@ -252,6 +252,22 @@ class Entry(models.Model):
 class Day(models.Model):
     date = models.DateField(primary_key=True)
     element = models.ManyToManyField('Element', through=Entry, related_name='days')
+    start = models.TimeField(verbose_name='Working Day Start Time')
+    end = models.TimeField(verbose_name='Working Day End Time')
+
+    is_vacation = models.BooleanField(verbose_name='Vacation', default=False)
+    is_public_holiday = models.BooleanField(verbose_name='Public Holiday', default=False)
 
     def __str__(self):
         return str(self.date)
+
+    @property
+    def total_duration(self):
+        return self.end - self.start
+    
+    @property
+    def is_weekend(self):
+        if self.date.weekday() > 4:
+            return True
+        else:
+            return False

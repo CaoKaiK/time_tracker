@@ -12,7 +12,7 @@ from django.views.generic import (
 
 from django.contrib.messages.views import SuccessMessageMixin
 
-from tracker.models import Customer, Group, Element
+from tracker.models import Customer, Group, Element, Entry, Day
 
 
 def home(request):
@@ -72,6 +72,10 @@ class ElementDeleteView(DeleteView):
         return super(ElementDeleteView, self).delete(request, *args, **kwargs)
     def get_success_url(self):
         return reverse('group-detail', kwargs={'pk': self.object.group.id})
+
+
+class DayDetailView(DetailView):
+    model = Day
 
         
 # class ProjectDetailView(DetailView):

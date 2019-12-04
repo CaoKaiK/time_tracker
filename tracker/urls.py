@@ -9,6 +9,7 @@ from .views import (
     ElementDetailView,
     ElementCreateView,
     ElementDeleteView,
+    DayDetailView,
 
     )
 from . import views
@@ -32,6 +33,11 @@ urlpatterns = [
             ])),
              
         ])),
+    ])),
+    path('entry/', include([
+        path('day/', include([
+            path('<pk>/', DayDetailView.as_view(), name='day-detail')
+        ]))
     ])),
 
     #path('projects/', ProjectListView.as_view(), name='projects-list'),

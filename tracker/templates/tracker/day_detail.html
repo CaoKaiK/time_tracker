@@ -1,0 +1,47 @@
+{% extends "tracker/calendar_base.html" %}
+
+{% load filters %}
+
+{% block card-content %}
+
+<div class="card-body">
+    <h5 class="card-title">{{ day }} 
+        {% if day.is_weekend %}
+            <span class="badge badge-blue-light ml-3">Weekend</span>
+        {% elif day.is_public_holiday %}
+            <span class="badge badge-soft-red ml-3">Public Holiday</span>
+        {% elif day.is_vacation %}
+            <span class="badge badge-siemens-yellow-dark ml-3">Vacation</span>
+        {% endif %}
+    </h5>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                    <div class="table-responsive">   
+                            <table class="table table-hover mt-3">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Property:</th>
+                                        <th scope="col">Value:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Start Time</td>
+                                        <td>{{ day.start | time:"H:i" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>End Time</td>
+                                        <td>{{ day.end | time:"H:i" }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock card-content %}
