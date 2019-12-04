@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Project, Element, Entry
+from .models import Customer, Group, Element, Entry, Day
 
-admin.site.register(Project)
+admin.site.register(Customer)
+admin.site.register(Group)
 admin.site.register(Element)
 admin.site.register(Entry)
+admin.site.register(Day)

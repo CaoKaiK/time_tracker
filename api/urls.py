@@ -2,15 +2,22 @@ from django.urls import include, path
 
 from rest_framework import routers
 
-from .views import ProjectViewSet, ElementViewSet, EntryViewSet
-from .views import ListProjects
+from api.views import (
+    ActivityViewSet,
+    TagViewSet,
+    CustomerViewSet,
+    GroupViewSet,
+    ElementViewSet
+    )
 
 router = routers.DefaultRouter()
-router.register(r'projects', ProjectViewSet)
+router.register(r'activites', ActivityViewSet)
+router.register(r'tags', TagViewSet)
+router.register(r'customers', CustomerViewSet)
+router.register(r'groups', GroupViewSet)
 router.register(r'elements', ElementViewSet)
-router.register(r'entry', EntryViewSet)
+
 
 urlpatterns = [
     path('', include(router.urls), name='api-v1'),
-    path('data2', ListProjects.as_view()),
 ]

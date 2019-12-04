@@ -6,7 +6,7 @@
 
 <div class="card shadow-sm card-sm mb-3">
     <div class="card-body">
-        <a href="{% url 'projects-create' %}" class="card-title-link align-middle">
+        <a href="#" class="card-title-link align-middle">
             <h5 class="card-title "><i class="fas fa-plus-square mr-3" style="color: gray;"></i>New Project</h5>
         </a>
     </div>
@@ -18,19 +18,19 @@
 
 <div class="card shadow-sm card-sm mb-3">
     <div class="card-body">
-        <a href="{% url 'projects-detail' pk=project.id %}" class="card-title-link">
+        <a href="#" class="card-title-link">
             <h5 class="card-title">{{ project.project_name }}</h5>
         </a>
         <h6 class="card-subtitle mb-2 text-muted">{{ project.country_name }}</h6>
         
         {% for element in project.get_subfeature_elements %}
-        <a href="{% url 'projects-element-entry-create' pk_pro=project.id pk=element.id %}"
+        <a href="#"
             class="badge badge-secondary">{{ element.element }} | {{ element.act_description}}</a>
         {% endfor%}
     </div>
     <div class="card-footer text-muted">
-        <a href="{% url 'projects-element-create' pk=project.id %}" class="badge badge-secondary"><i class="fas fa-plus-square mr-1"></i>Add WBS</a>
-        <a href="{% url 'projects-update' pk=project.id %}" class="badge badge-secondary"><i class="fas fa-edit mr-1"></i>Edit</a>
+        <a href="#" class="badge badge-secondary"><i class="fas fa-plus-square mr-1"></i>Add WBS</a>
+        <a href="#" class="badge badge-secondary"><i class="fas fa-edit mr-1"></i>Edit</a>
         
     </div>
 </div>

@@ -31,8 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'tracker.apps.TrackerConfig',
-    'dashboard.apps.DashboardConfig',
+    'settings.apps.SettingsConfig',     # Settings
+    'tracker.apps.TrackerConfig',       # Tracker
+    'dashboard.apps.DashboardConfig',   # Dashboard
     'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

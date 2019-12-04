@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid no-pad">
+    <div class="row">
+        <div class="col-md vl">
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <a href="{% url 'group-create' %}" class="card-title-link align-middle">
+                        <h5 class="card-title text-muted"><i class="fas fa-plus-square mr-3" style="color: gray;"></i>Create Element Group</h5>
+                    </a>
+                </div>
+            </div>
+            
+            {% for group in object_list %}
+                {% if group.row == 1%}
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <a href="{% url 'group-detail' pk=group.id %}" class="card-title-link">
+                            <h5 class="card-title">{{ group.group_name }}</h5>
+                        </a>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ group.customer.country }}</h6>
+                        
+                        {% for element in group.elements.all %}
+                        {% if element.tag %}
+                        <a href="#" class="badge badge-secondary" style="background-color: {{ element.tag.light_hex }};">{{ element }}</a>
+                        {% else%}
+                        <a href="#" class="badge badge-secondary">{{ element }}</a>
+                        {% endif %}
+                        {% endfor%}
+                    </div>
+                    <div class="card-footer text-muted">
+                        <a href="{% url 'group-element-create' pk_group=group.id %}" class="badge badge-light text-muted"><i class="fas fa-plus-square mr-1"></i>Add Element</a>
+                        <a href="{% url 'group-update' pk=group.id %}" class="badge badge-light text-muted"><i class="fas fa-edit mr-1"></i>Edit Group</a>
+                        
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="col-md vl">
+                {% for group in object_list %}
+                {% if group.row == 2%}
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <a href="{% url 'group-detail' pk=group.id %}" class="card-title-link">
+                            <h5 class="card-title">{{ group.group_name }}</h5>
+                        </a>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ group.customer.country }}</h6>
+                        
+                        {% for element in group.elements.all %}
+                        {% if element.tag %}
+                        <a href="#" class="badge badge-secondary" style="background-color: {{ element.tag.light_hex }};">{{ element }}</a>
+                        {% else%}
+                        <a href="#" class="badge badge-secondary">{{ element }}</a>
+                        {% endif %}
+                        {% endfor%}
+                    </div>
+                    <div class="card-footer text-muted">
+                        <a href="{% url 'group-element-create' pk_group=group.id %}" class="badge badge-light text-muted"><i class="fas fa-plus-square mr-1"></i>Add Element</a>
+                        <a href="{% url 'group-update' pk=group.id %}" class="badge badge-light text-muted"><i class="fas fa-edit mr-1"></i>Edit Group</a>
+                        
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col-md">
+                {% for group in object_list %}
+                {% if group.row == 3 %}
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <a href="{% url 'group-detail' pk=group.id %}" class="card-title-link">
+                            <h5 class="card-title">{{ group.group_name }}</h5>
+                        </a>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ group.customer.country }}</h6>
+                        
+                        {% for element in group.elements.all %}
+                        {% if element.tag %}
+                        <a href="#" class="badge badge-secondary" style="background-color: {{ element.tag.light_hex }};">{{ element }}</a>
+                        {% else%}
+                        <a href="#" class="badge badge-secondary">{{ element }}</a>
+                        {% endif %}
+                        {% endfor%}
+                    </div>
+                    <div class="card-footer text-muted">
+                        <a href="{% url 'group-element-create' pk_group=group.id %}" class="badge badge-light text-muted"><i class="fas fa-plus-square mr-1"></i>Add Element</a>
+                        <a href="{% url 'group-update' pk=group.id %}" class="badge badge-light text-muted"><i class="fas fa-edit mr-1"></i>Edit Group</a>
+                        
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    
+</div>
+
+{% endblock content %}

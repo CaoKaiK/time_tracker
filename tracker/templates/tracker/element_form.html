@@ -1,44 +1,50 @@
-{% extends "base.html" %}
+{% extends "tracker/element_base.html" %}
+{% load static %}
+{% load widget_tweaks %}
 
-{% block content %}
+{% block card-content %}
 
-<div class="card mb-3">
-    <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-                {% if element.project.id %}
-                <a href="{% url 'projects-detail' pk=element.project.id %}" class="nav-link card-nav-link"><i
-                        class="fas fa-caret-square-left mr-2"></i>Project</a>
-                {% elif project %}
-                <a href="{% url 'projects-detail' pk=project.id %}" class="nav-link card-nav-link"><i
-                    class="fas fa-caret-square-left mr-2"></i>{{project.project_name}}{{id}}</a>
-                {% else %}
-                <a href="{% url 'projects-list' %}" class="nav-link card-nav-link"><i
-                        class="fas fa-caret-square-left mr-2"></i>Unsaved Project</a>
-                {% endif %}
-            </li>
-            <li class="nav-item">
-                {% if element.project.id and element.id %}
-                <a href="{% url 'projects-element-detail' pk_pro=element.project.id pk=element.id %}"
-                    class="nav-link card-nav-link">WBS</a>
-                {% else %}
-                <a href="#"
-                    class="nav-link card-nav-link">Unsaved WBS</a>
-                {% endif %}
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link active"><i class="fas fa-edit mr-2"></i>Edit</a>
-            </li>
-            <li class="nav-item ml-auto">
-                <a href="#" class="btn btn-siemens-yellow-dark"><i class="fas fa-trash-alt mr-2"></i>Delete</a>
-            </li>
 
-        </ul>
-    </div>
     <div class="card-body">
         <form method="post">{% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Save">
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+    
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+            {% endif %}
+    
+            {% for field in form.visible_fields %}
+            <div class="form-group">
+                {{ field.label_tag }}
+    
+                {% if form.is_bound %}
+                    {% if field.errors %}
+                        {% render_field field class="form-control is-invalid" %}
+                        {% for error in field.erros %}
+                        <div class="invalid-feedback">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field field class="form-control simple-valid" %}
+                    {% endif %}
+                {% else %}
+                    {% render_field field class="form-control" %}
+                {% endif %}
+    
+                {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+            </div>
+            {% endfor %}
+    
+            <button type="submit" class="btn btn-siemens-green"> Update </button>
         </form>
     </div>
 </div>

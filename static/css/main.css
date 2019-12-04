@@ -42,7 +42,7 @@
     padding-left: 0rem;
   }
   .nav-bot {
-    margin-top: calc(100vh - 18.5rem);
+    margin-top: calc(100vh - 21.5rem);
   }
 
 }
@@ -64,6 +64,8 @@
   margin-right: 0px;
 }
 
+
+
 .no-pad-tb {
   padding-bottom: 0px;
   padding-top: 0px;
@@ -71,6 +73,10 @@
 
 .card-sm {
   width: 18rem;
+}
+
+.card-tag {
+  width: 12rem;
 }
 
 
@@ -85,4 +91,12 @@
 
 .vl {
   border-right: 0.1rem solid rgba(0,0,0,.1)
+}
+
+.simple-valid {
+  border-color: #96a51e;
+}
+
+.simple-invalid {
+  border-color: #eb780a;
 }

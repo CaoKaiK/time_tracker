@@ -1,42 +1,30 @@
 from rest_framework import serializers
 
-from tracker.models import Project, Element, Entry
+from settings.models import Activity, Tag
+from tracker.models import Customer, Group, Element, Day
 
-class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Project
-        fields = [
-            'project_name',
-            'country_name',
-            'customer_name',
-            'customer_street',
-            'customer_postal',
-            'customer_city',
-            'active',
-            'created_date',
-            'modified_date',
-        ]
+        model = Activity
+        fields = '__all__'
+
+class TagSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Tag
+        fields = '__all__'
+
+class CustomerSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Customer
+        fields = '__all__'
+
+class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Group
+        fields = '__all__'
 
 class ElementSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Element
-        fields = [
-            'project',
-            'element',
-            'act_description',
-            'act_type',
-            'act',
-            'active'
-        ]
+        fields = '__all__'
 
-class EntrySerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Entry
-        fields = [
-            'element',
-            'date',
-            'duration',
-            'rest',
-            'description',
-            'booked',
-        ]

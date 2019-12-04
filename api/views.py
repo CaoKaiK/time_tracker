@@ -1,35 +1,38 @@
 from django.shortcuts import render
 
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import viewsets
 
+from settings.models import Activity, Tag
+from tracker.models import Customer, Group, Element
 
-from tracker.models import Project, Element, Entry
-
-from .serializers import ProjectSerializer, ElementSerializer, EntrySerializer
-
+from .serializers import (
+    ActivitySerializer,
+    TagSerializer,
+    CustomerSerializer,
+    GroupSerializer,
+    ElementSerializer
+    )
 
 
 # API VIEWS
+class ActivityViewSet(viewsets.ModelViewSet):
+    queryset = Activity.objects.all() # pylint: disable=maybe-no-member
+    serializer_class = ActivitySerializer
 
-class ListProjects(APIView):
-    authentication_classes = []
-    permission_classes = []
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all() # pylint: disable=maybe-no-member
+    serializer_class = TagSerializer
 
-    def get(self, request, format=None):
-        project_names = [project.project_name for project in Project.objects.all()] # pylint: disable=maybe-no-member
-        return Response(project_names)
+class CustomerViewSet(viewsets.ModelViewSet):
+    queryset = Customer.objects.all() # pylint: disable=maybe-no-member
+    serializer_class = CustomerSerializer
 
-class ProjectViewSet(viewsets.ModelViewSet):
-    queryset = Project.objects.all() # pylint: disable=maybe-no-member
-    serializer_class = ProjectSerializer
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all() # pylint: disable=maybe-no-member
+    serializer_class = GroupSerializer
 
 class ElementViewSet(viewsets.ModelViewSet):
     queryset = Element.objects.all() # pylint: disable=maybe-no-member
     serializer_class = ElementSerializer
-
-class EntryViewSet(viewsets.ModelViewSet):
-    queryset = Entry.objects.all() # pylint: disable=maybe-no-member
-    serializer_class = EntrySerializer

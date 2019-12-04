@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow-sm mb-3">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a href="{% url 'settings-personal' %}"
+                    class="nav-link {% if "personal" in request.resolver_match.url_name %} active {% else %} card-nav-link {% endif %}">
+                    <i class="fas fa-user-edit mr-2"></i>Personal</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'settings-tags' %}" class="nav-link {% if "tags" in request.resolver_match.url_name %} active {% else %} card-nav-link {% endif %}">
+                    <i class="fas fa-tags mr-2"></i>Tags</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link card-nav-link">
+                    <i class="fas fa-building mr-2"></i>SAP Settings</a>
+            </li>
+
+        </ul>
+    </div>
+
+    {% block card-content %}
+    {% endblock card-content %}
+</div>
+
+{% endblock content %}
