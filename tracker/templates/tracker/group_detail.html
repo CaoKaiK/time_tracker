@@ -44,15 +44,15 @@
         </div>
     </div>
     
-    <h5 class="card-title">Elements: <a class="btn btn-secondary ml-4" href="{% url 'group-element-create' pk_group=group.id %}" role="button"><i
+    <h5 class="card-title mt-4">Elements: <a class="btn btn-secondary ml-4" href="{% url 'group-element-create' pk_group=group.id %}" role="button"><i
         class="fas fa-plus-square mr-2"></i>Add WBS</a> </h5>
         
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">Status</th>
-                    <th scope="col">Activity</th>
                     <th scope="col">Activity Type</th>
+                    <th scope="col">Activity</th>
                     <th scope="col">Receiver CCenter</th>
                     <th scope="col">Element</th>
                     <th scope="col">Receiver Order</th>              
@@ -70,9 +70,12 @@
                         <span class="badge badge-siemens-yellow-dark">Inactive</span>
                         {% endif %}
                     </td>
-                    <td>{{ element.activity.activity_name }}</td>
                     <td>{{ element.activity_type }}</td>
-                    <td>{{ element.receiver_ccenter }}</td>
+                    <td>{{ element.activity.activity_name }}</td>
+                    <td>
+                        <a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}">
+                            {{ element.receiver_ccenter }}</td>
+                        </a>
                     <td>
                         <a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}">
                             {{ element.wbs_element }}

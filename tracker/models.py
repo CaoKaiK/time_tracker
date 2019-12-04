@@ -60,7 +60,7 @@ class Group(models.Model):
     ROW_CHOICES = [
         (ROW1, 'Row 1'),
         (ROW2, 'Row 2'),
-        (ROW2, 'Row 3',)
+        (ROW3, 'Row 3',)
     ]
 
     group_name = models.CharField(
@@ -179,7 +179,16 @@ class Element(models.Model):
         verbose_name_plural = 'elements'
     
     def __str__(self):
-        return f'{self.receiver_ccenter} | {self.wbs_element} | {self.description}'
+        if self.wbs_element:
+            return f'{self.wbs_element} | {self.description}'
+        elif self.receiver_ccenter:
+            if self.receiver_order:
+                return f'{self.receiver_ccenter} | {self.receiver_order} | {self.description}'
+            else:
+                return f'{self.receiver_ccenter} | {self.description}'
+        else:
+            return f'{self.description}'
+        
 
     def get_absolute_url(self):
         return None
@@ -234,7 +243,7 @@ class Entry(models.Model):
         verbose_name_plural = 'entries'
     
     def __str__(self):
-        return f'{str(self.date)} {self.element} {self.id}'
+        return f'{str(self.date)} {self.element} {self.id}' # pylint: disable=maybe-no-member
 
     def get_absolute_url(self):
         return None

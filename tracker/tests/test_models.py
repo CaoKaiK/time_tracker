@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from settings.models import Activity, Tag
-from tracker.models import Customer, Group, Project, Element
+from tracker.models import Customer, Group, Element
 
 
 class CustomerModelTest(TestCase):
@@ -59,24 +59,7 @@ class GroupModelTest(TestCase):
         expected_object_name = f'{group.group_name}'
         self.assertEquals(expected_object_name, str(group))
     
-class ProjectModelTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        Customer.objects.create(customer_name='Customer', country='Country', city='City', street='Street', postal='Postal') # pylint: disable=maybe-no-member
-        customer = Customer.objects.get(id=1) # pylint: disable=maybe-no-member
-        Project.objects.create(project_name='Test Group', customer_id=customer, active=True) # pylint: disable=maybe-no-member
 
-    # max lengths
-    def test_project_name_max_length(self):
-        project = Project.objects.get(id=1) # pylint: disable=maybe-no-member
-        max_length = project._meta.get_field('project_name').max_length
-        self.assertEqual(max_length, 20)
-
-    # __str__
-    def test_object_name(self):
-        project = Project.objects.get(id=1) # pylint: disable=maybe-no-member
-        expected_object_name = f'{project.project_name}'
-        self.assertEquals(expected_object_name, str(project))
 
 class ElementModelTest(TestCase):
     @classmethod
@@ -92,12 +75,10 @@ class ElementModelTest(TestCase):
         g1 = Group.objects.create(group_name='Test Group', customer_id=c)
         g2 = Group.objects.create(group_name='No Customer')
 
-        p1 = Project.objects.create(project_name='Test Project', customer_id=c)
-        p2 = Project.objects.create(project_name='No Customer')
+
 
         e1 = Element.objects.create(group=g1, activity=a1, code_act_type='012', description='has code')
         e2 = Element.objects.create(group=g2, activity=a1, description='No act code')
-        e3 = Element.objects.create(project=p1, activity=a2, description='No act code')
 
         e4 = Element.objects.create(activity=a1, description='No Proj No group')
 
@@ -137,10 +118,6 @@ class ElementModelTest(TestCase):
         name = e2.project_or_group_name
         self.assertEqual(name, e2.group.group_name)
 
-    def test_project_or_group_name_is_project(self):
-        e3 = Element.objects.get(id=3)
-        name = e3.project_or_group_name
-        self.assertEqual(name, e3.project.project_name)
     
     def test_project_or_group_name_is_none(self):
         e4 = Element.objects.get(id=4)
