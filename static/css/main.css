@@ -100,3 +100,45 @@
 .simple-invalid {
   border-color: #eb780a;
 }
+
+
+.calendar {
+  font-size: 1rem;
+}
+
+
+.calendar th {
+  padding: 0.2rem;
+  text-align: center;
+  color: #6c757d !important;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.month {
+  padding: 0rem 0rem 1rem 0rem !important;
+}
+
+.calendar td {
+  vertical-align: top;
+  border: 0.1rem solid rgba(0,0,0,.1);
+  width: 10rem;
+  height: 5rem;
+  
+}
+
+.header-small {
+  padding: 0.1rem 1rem 0.1rem 1rem;
+  text-align: right;
+  
+}
+
+.card-list-small {
+  padding: 0.1rem 1rem 0.1rem 1rem;
+}
+
+.date {
+  
+}
+

@@ -29,13 +29,13 @@
                         <span class="text-muted">Activity Type:</span> {{ element.activity_type }}<br>
                         {% endif%}
                         {% if element.receiver_ccenter %}
-                        Cost center: {{ element.receiver_ccenter }}<br>
+                        <span class="text-muted">Cost center:</span> {{ element.receiver_ccenter }}<br>
                         {% endif%}
                         {% if element.wbs_element %}
                         <span class="text-muted">WBS-Element:</span> {{ element.wbs_element }}<br>
                         {% endif%}
                         {% if element.receiver_order %}
-                        Receiver Order: {{ element.receiver_order}}
+                        <span class="text-muted">Receiver Order:</span> {{ element.receiver_order }}<br>                        
                         {% endif %}
 
                     </p>

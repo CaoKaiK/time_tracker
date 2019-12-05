@@ -1,0 +1,24 @@
+{% extends "tracker/calendar_base.html" %}
+
+{% load filters %}
+
+{% block card-content %}
+
+    <ul class="nav mt-3">
+                <li class="nav-item ml-3">
+                    <a class="btn btn-outline-info" href="?{{ prev_month }}"> Previous Month </a>
+                </li>
+                <li class="nav-item ml-auto mr-3">
+                    <a class="btn btn-outline-info ml-auto" href="?{{ next_month }}"> Next Month </a>
+                </li>
+                
+                
+        
+    </ul>
+
+
+
+<div class="card-body">
+    {{ calendar }}
+</div>
+{% endblock card-content %}

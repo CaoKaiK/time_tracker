@@ -53,8 +53,8 @@
             <div class="col-md-3 col-lg-2 lg-max bd-sidebar">
                 <div class="sticky-top custom-sticky">
                     <ul class="nav flex-column">
-                        <a class="nav-link {% if "entries" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
-                            href="#">
+                        <a class="nav-link {% if "entry" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
+                            href="{% url 'entry-month'%}">
                             <i class="fas fa-clock fa-fw mr-2"></i>
                             <span>Time Entries</span>
                         </a>

@@ -11,7 +11,8 @@ from .views import (
     ElementUpdateView,
     ElementDeleteView,
     DayDetailView,
-
+    CalendarView,
+    
     )
 from . import views
 
@@ -27,7 +28,7 @@ urlpatterns = [
         ])),
         path('<int:pk_group>/element/', include([            
             path('create/', ElementCreateView.as_view(), name='group-element-create'),
-            path('<int:pk>', include([
+            path('<int:pk>/', include([
                 path('', ElementDetailView.as_view(), name='group-element-detail'),
                 path('update/', ElementUpdateView.as_view(), name='group-element-update'),
                 path('delete/', ElementDeleteView.as_view(), name='group-element-delete'),
@@ -37,9 +38,10 @@ urlpatterns = [
         ])),
     ])),
     path('entry/', include([
+        path('month/', CalendarView.as_view(), name='entry-month'),
         path('day/', include([
-            path('<pk>/', DayDetailView.as_view(), name='day-detail')
-        ]))
+            path('<pk>/', DayDetailView.as_view(), name='entry-day-detail'),
+        ])),
     ])),
 
     #path('projects/', ProjectListView.as_view(), name='projects-list'),

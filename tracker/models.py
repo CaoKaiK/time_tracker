@@ -99,7 +99,6 @@ class Group(models.Model):
     def get_absolute_url(self):
         return reverse('group-list')
     
-
 class Element(models.Model):
     '''
     Element Model - Each element represents a separate cost entity. Due to the different combination of booking
