@@ -1,6 +1,42 @@
 from django.db import models
 from django.core import validators
 
+import datetime
+
+
+class User(models.Model):
+    user_name = models.CharField(max_length=30,)
+    user_img = models.ImageField(blank=True, null=True, upload_to='img/')
+    location = models.CharField(max_length=30,)
+    org_name = models.CharField(max_length=30,)
+    ccenter = models.CharField(max_length=6,)
+    start = models.DateField()
+
+    def __str__(self):
+        return self.user_name
+
+    @property 
+    def weekly_hours(self):
+        current = Contract.objects.first()
+        if current:
+            return current.target*5
+        else:
+            return datetime.timedelta(0,0)
+
+    
+class Contract(models.Model):
+    date = models.DateField(primary_key=True)
+    target = models.DurationField(default=datetime.timedelta(hours=7))
+    
+
+
+    class Meta:
+        ordering = ['-date']
+
+    def __str__(self):
+        h_day = int(self.target.total_seconds()/3600)
+        return f'{str(self.date)} | {h_day} h'
+
 
 class Activity(models.Model):
     '''
@@ -33,10 +69,6 @@ class Activity(models.Model):
 
     def get_absolute_url(self):
         return None
-
-
-
-
 
 class Tag(models.Model):
     '''

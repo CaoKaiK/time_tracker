@@ -38,6 +38,7 @@ urlpatterns = [
         ])),
     ])),
     path('entry/', include([
+        path('filter/day/<pk>', CalendarView.as_view(), name='entry-filter-day'),
         path('month/', CalendarView.as_view(), name='entry-month'),
         path('day/', include([
             path('<pk>/', DayDetailView.as_view(), name='entry-day-detail'),

@@ -1,4 +1,6 @@
-from datetime import datetime, timedelta
+import calendar
+
+from datetime import datetime, timedelta, date
 from calendar import HTMLCalendar
 
 from tracker.models import Entry, Day
@@ -15,13 +17,30 @@ class Calendar(HTMLCalendar):
 	def formatday(self, day, entries, my_days):
 		'''format day brackets'''
 		entries = entries.filter(date__date__day=day)
-		my_day = my_days.filter(date__day=day)
+		my_day = my_days.filter(date__day=day).first()
+
+		day_string = f'{self.year}-{self.month}-{day}'
+		# create day for existing days
+		if day != 0 and not my_day:
+			
+			my_day = Day.objects.create(date=day_string)
+			my_day.save()
+			my_day = Day.objects.get(date=day_string)
+
 		entry_list = ''
 		for entry in entries:
-			entry_list += f'<li class="list-group-item card-list-small"> {entry.element.group} </li>'
+			entry_list += f'<span class="badge badge-secondary m-1"> {entry.element.group} </span>'
 
 		if day != 0:
-			return f'<td><div class="card"><div class="card-header header-small">{day}</div><ul class="list-group list-group-flush">{entry_list}</ul></div></td>'
+			if my_day.is_weekend:
+				return f"""<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-blue-light">{day}</div></a>{entry_list}</ul></div></td>"""
+			elif my_day.is_public_holiday:
+				return f'<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-soft-red">{day}</div></a>{entry_list}</ul></div></td>'
+			elif my_day.is_vacation:
+				return f'<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-siemens-yellow-dark">{day}</div></a>{entry_list}</ul></div></td>'
+			else:
+				return f'<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-light">{day}</div></a>{entry_list}</ul></div></td>'
+
 		return '<td></td>'
 
 
@@ -32,8 +51,16 @@ class Calendar(HTMLCalendar):
 			week += self.formatday(d, entries, my_days)
 		return f'<tr> {week} </tr>'
 
+	def formatweekview(self, withyear=True):
+		'''format header and add single week'''
+		entries = Entry.objects.filter(date__date__year=self.year, date__date__month=self.month)
+		my_days = Day.objects.filter(date__date__year=self.year, date__date__month=self.month)
 
-	def formatmonth(self, withyear=True):
+		cal = f'<table class="calendar">\n'
+		cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'
+		cal += f'{self.formatweekheader()}\n'
+
+	def formatmonthview(self, withyear=True):
 		'''format header and adds weeks as rows'''
 		entries = Entry.objects.filter(date__date__year=self.year, date__date__month=self.month)
 		my_days = Day.objects.filter(date__year=self.year, date__month=self.month)
@@ -44,3 +71,22 @@ class Calendar(HTMLCalendar):
 		for week in self.monthdays2calendar(self.year, self.month):
 			cal += f'{self.formatweek(week, entries, my_days)}\n'
 		return cal
+
+def get_date(req_day):
+    if req_day:
+        year, month = (int(x) for x in req_day.split('-'))
+        return date(year, month, day=1)
+    return datetime.today()
+
+def prev_month(d):
+    first = d.replace(day=1)
+    prev_month = first - timedelta(days=1)
+    month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+    return month
+
+def next_month(d):
+    days_in_month = calendar.monthrange(d.year, d.month)[1]
+    last = d.replace(day=days_in_month)
+    next_month = last + timedelta(days=1)
+    month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+    return month

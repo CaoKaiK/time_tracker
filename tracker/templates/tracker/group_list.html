@@ -26,9 +26,9 @@
                         
                         {% for element in group.elements.all %}
                         {% if element.tag %}
-                        <a href="#" class="badge badge-secondary" style="background-color: {{ element.tag.light_hex }};">{{ element }}</a>
+                        <a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}" class="badge badge-secondary" style="background-color: {{ element.tag.light_hex }};">{{ element }}</a>
                         {% else%}
-                        <a href="#" class="badge badge-secondary">{{ element }}</a>
+                        <a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}" class="badge badge-secondary">{{ element }}</a>
                         {% endif %}
                         {% endfor%}
                     </div>
@@ -54,9 +54,9 @@
                         
                         {% for element in group.elements.all %}
                         {% if element.tag %}
-                        <a href="#" class="badge badge-secondary" style="background-color: {{ element.tag.light_hex }};">{{ element }}</a>
+                            <a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}" class="badge badge-secondary" style="background-color: {{ element.tag.light_hex }};">{{ element }}</a>
                         {% else%}
-                        <a href="#" class="badge badge-secondary">{{ element }}</a>
+                            <a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}" class="badge badge-secondary">{{ element }}</a>
                         {% endif %}
                         {% endfor%}
                     </div>
@@ -81,9 +81,9 @@
                         
                         {% for element in group.elements.all %}
                         {% if element.tag %}
-                        <a href="#" class="badge badge-secondary" style="background-color: {{ element.tag.light_hex }};">{{ element }}</a>
+                        <a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}" class="badge badge-secondary" style="background-color: {{ element.tag.light_hex }};">{{ element }}</a>
                         {% else%}
-                        <a href="#" class="badge badge-secondary">{{ element }}</a>
+                        <a href="{% url 'group-element-detail' pk_group=group.id pk=element.id %}" class="badge badge-secondary">{{ element }}</a>
                         {% endif %}
                         {% endfor%}
                     </div>

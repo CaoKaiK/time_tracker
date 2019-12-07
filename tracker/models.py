@@ -1,9 +1,12 @@
 from django.db import models
 from django.urls import reverse
 
-from datetime import datetime, timedelta
+from django.db.models import Sum
 
-from settings.models import Activity, Tag
+import datetime
+
+
+from settings.models import User, Contract, Activity, Tag
 
 
 class Customer(models.Model):
@@ -217,13 +220,9 @@ class Entry(models.Model):
     # reference Day model as string as day has not been defined yet
     date = models.ForeignKey(
         'Day',
-        on_delete = models.SET_NULL,
-        blank = True,
-        null = True,
+        on_delete = models.CASCADE,
         related_name = 'entries'
     )
-    start = models.TimeField(verbose_name='Starting Time')
-    end = models.TimeField(verbose_name='Ending Time')
     timeout = models.DurationField(verbose_name='Duration of break time')
     duration = models.DurationField(verbose_name='Duration of time attributed to Element')
     description = models.CharField(max_length=20, verbose_name='Description of Entry (default is description of parent Element)')
@@ -247,12 +246,27 @@ class Entry(models.Model):
     def get_absolute_url(self):
         return None
     
+    @property
+    def start(self):
+        query = self.date.entries.first()
+        if query:
+            return query.end
+        else:
+            return self.date.start
+    
+    @property
+    def end(self):
+        return self.start + self.duration
 
+    
 class Day(models.Model):
     date = models.DateField(primary_key=True)
     element = models.ManyToManyField('Element', through=Entry, related_name='days')
-    start = models.TimeField(verbose_name='Working Day Start Time')
-    end = models.TimeField(verbose_name='Working Day End Time')
+    start = models.TimeField(default=datetime.time(9,0) ,verbose_name='Working Day Start Time',)
+    end = models.TimeField(default=datetime.time(9,0), verbose_name='Working Day End Time')
+    timeout = models.DurationField(default=datetime.timedelta(0), verbose_name='Total Break on this day')
+    withdrawal = models.DurationField(default=datetime.timedelta(0), verbose_name='One-time withdrawal')
+
 
     is_vacation = models.BooleanField(verbose_name='Vacation', default=False)
     is_public_holiday = models.BooleanField(verbose_name='Public Holiday', default=False)
@@ -261,12 +275,37 @@ class Day(models.Model):
         return str(self.date)
 
     @property
-    def total_duration(self):
-        return self.end - self.start
-    
-    @property
     def is_weekend(self):
+        '''0,1,2,3,4 = Mon, Tue, Wed, Thu, Fri'''
         if self.date.weekday() > 4:
             return True
         else:
             return False
+
+    @property
+    def total_duration(self):
+        start = datetime.datetime.combine(datetime.date.today(), self.start)
+        end = datetime.datetime.combine(datetime.date.today(), self.end)
+        return end - start - self.timeout
+
+    @property
+    def entries_sum_duration(self):
+        query = self.entries.aggregate(Sum('duration'))['duration__sum']
+        print(query)
+        if query:
+            return query
+        else:
+            return datetime.timedelta(0,0)
+
+    @property
+    def target(self):
+        if self.is_public_holiday or self.is_weekend:
+            return datetime.timedelta(0,0)
+        else:
+            return Contract.objects.filter()
+
+    @property
+    def balance_day(self):
+        balance = self.entries_sum_duration - self.target - self.withdrawal
+        return balance
+    
