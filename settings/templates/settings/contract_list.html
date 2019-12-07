@@ -18,6 +18,9 @@
                         <p class="card-text">Organisation: {{ user.org_name }}</p>
                         <p class="card-text">Cost Center: {{ user.ccenter }}</p>
                         <p class="card-text">Weekly Hours: {{ user.weekly_hours | duration }}</p>
+                        <p class="card-text">Normal Start: {{ user.normal_start | time:'H:i' }}</p>
+                        <p class="card-text">Normal End: {{ user.normal_end | time:'H:i' }}</p>
+
                     </div>
                 </div>
             </div>

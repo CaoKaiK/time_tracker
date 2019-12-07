@@ -11,6 +11,8 @@ class User(models.Model):
     org_name = models.CharField(max_length=30,)
     ccenter = models.CharField(max_length=6,)
     start = models.DateField()
+    normal_start = models.TimeField(default=datetime.time(8,45))
+    normal_end = models.TimeField(default=datetime.time(17,0))
 
     def __str__(self):
         return self.user_name

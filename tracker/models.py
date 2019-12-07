@@ -302,7 +302,11 @@ class Day(models.Model):
         if self.is_public_holiday or self.is_weekend:
             return datetime.timedelta(0,0)
         else:
-            return Contract.objects.filter()
+            query = Contract.objects.filter(date__lte=self.date).first()
+            if query:
+                return query.target
+            else:
+                return datetime.timedelta(hours=7)
 
     @property
     def balance_day(self):
