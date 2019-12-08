@@ -7,10 +7,13 @@ from .views import (
     GroupUpdateView,
     GroupDeleteView,
     ElementDetailView,
-    ElementCreateView,
+    ElementCreateFromListView,
     ElementUpdateView,
     ElementDeleteView,
-    DayDetailView,
+    DayUpdateView,
+    EntryCreateFromDayView,
+    EntryUpdateView,
+    EntryDeleteView,
     CalendarView,
     
     )
@@ -27,7 +30,7 @@ urlpatterns = [
             path('delete/', GroupDeleteView.as_view(), name='group-delete'),
         ])),
         path('<int:pk_group>/element/', include([            
-            path('create/', ElementCreateView.as_view(), name='group-element-create'),
+            path('create/', ElementCreateFromListView.as_view(), name='group-element-create'),
             path('<int:pk>/', include([
                 path('', ElementDetailView.as_view(), name='group-element-detail'),
                 path('update/', ElementUpdateView.as_view(), name='group-element-update'),
@@ -38,26 +41,20 @@ urlpatterns = [
         ])),
     ])),
     path('entry/', include([
-        path('filter/day/<pk>', CalendarView.as_view(), name='entry-filter-day'),
+        path('create/', EntryCreateFromDayView.as_view(), name='entry-create-day'),
+        path('<int:pk>/', include([
+            path('', EntryUpdateView.as_view(), name='entry-update'),
+            path('delete/', EntryDeleteView.as_view(), name='entry-delete'),
+        ])),
+        
+        path('filter/day/<pk>/', CalendarView.as_view(), name='entry-filter-day'),
         path('month/', CalendarView.as_view(), name='entry-month'),
         path('day/', include([
-            path('<pk>/', DayDetailView.as_view(), name='entry-day-detail'),
+            path('<pk>/', include([                
+                path('', DayUpdateView.as_view(), name='entry-day-update'),                
+                
+            ])),
+            
         ])),
     ])),
-
-    #path('projects/', ProjectListView.as_view(), name='projects-list'),
-    #path('projects/<int:pk>/', ProjectDetailView.as_view(), name='projects-detail'),
-    #path('projects/create/', ProjectCreateView.as_view(), name="projects-create"),
-    #path('projects/<int:pk>/update/', ProjectUpdateView.as_view(), name='projects-update'),
-    #path('projects/<int:pk>/delete/', ProjectDeleteView.as_view(), name="projects-delete"),
-    # path('projects/<int:pk_pro>/element/<int:pk>', ElementDetailView.as_view(), name='projects-element-detail'),
-    # path('projects/<int:pk>/element/create', ElementCreateView.as_view(), name='projects-element-create'),
-    # path('projects/<int:pk_pro>/element/<int:pk>/update', ElementUpdateView.as_view(), name='projects-element-update'),
-    # path('projects/<int:pk_pro>/element/<int:pk>/delete', ElementDeleteView.as_view(), name='projects-element-delete'),
-    # path('projects/<int:pk_pro>/element/<int:pk>/entry/create', EntryFromWBSCreateView.as_view(), name='projects-element-entry-create'),
-    # path('entries/', EntryListView.as_view(), name='entries'),
-    # path('entries/<int:pk>', EntryDetailView.as_view(), name='entries-detail'),
-    # path('entries/create', EntryCreateView.as_view(), name='entries-create'),
-    # path('entries/<int:pk>/update', EntryUpdateView.as_view(), name='entries-update'),
-    # path('entries/<int:pk>/delete', EntryDeleteView.as_view(), name='entries-delete'),
 ]

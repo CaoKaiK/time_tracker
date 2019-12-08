@@ -123,9 +123,7 @@ class Element(models.Model):
     # FK to group: zero or one to many or none
     group = models.ForeignKey(
         Group,
-        on_delete = models.SET_NULL,
-        null = True,
-        default = None,
+        on_delete = models.CASCADE,
         related_name = 'elements'
         )
     # FK to tag: tero or one to many or none
@@ -211,10 +209,7 @@ class Element(models.Model):
 class Entry(models.Model):
     element = models.ForeignKey(
         Element,
-        on_delete = models.SET_NULL,
-        blank = True,
-        null = True,
-        default = None,
+        on_delete = models.CASCADE,
         related_name = 'entries'
         )
     # reference Day model as string as day has not been defined yet
@@ -223,16 +218,22 @@ class Entry(models.Model):
         on_delete = models.CASCADE,
         related_name = 'entries'
     )
-    timeout = models.DurationField(verbose_name='Duration of break time')
-    duration = models.DurationField(verbose_name='Duration of time attributed to Element')
-    description = models.CharField(max_length=20, verbose_name='Description of Entry (default is description of parent Element)')
+    
+    duration = models.DurationField(verbose_name='Duration of time attributed to Element', help_text='Duration in HH:mm:ss Format')
+    description = models.CharField(
+        max_length = 20,
+        blank = True,
+        verbose_name = 'Description of Entry',
+        help_text = 'Will inherit description from Element if left empty'
+    )
     tag = models.ForeignKey(
         Tag,
         on_delete = models.SET_NULL,
         blank = True,
         null = True,
         default = None,
-        related_name = 'entries'
+        related_name = 'entries',
+        help_text='Will inherit Tag from Element if left empty and Element has a Tag'
     )
 
     class Meta:
@@ -257,8 +258,7 @@ class Entry(models.Model):
     @property
     def end(self):
         return self.start + self.duration
-
-    
+  
 class Day(models.Model):
     date = models.DateField(primary_key=True)
     element = models.ManyToManyField('Element', through=Entry, related_name='days')
@@ -291,7 +291,6 @@ class Day(models.Model):
     @property
     def entries_sum_duration(self):
         query = self.entries.aggregate(Sum('duration'))['duration__sum']
-        print(query)
         if query:
             return query
         else:

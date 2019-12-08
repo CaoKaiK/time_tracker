@@ -44,7 +44,7 @@ def manage_tags(request):
         
         if formset.is_valid():
             update_tags = []
-            tag_id = 0
+            tag_id = 1
             
             for form in formset:
                 tag_name = form.cleaned_data.get('tag_name')

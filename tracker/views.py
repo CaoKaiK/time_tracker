@@ -18,6 +18,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from tracker.models import Customer, Group, Element, Entry, Day
 from tracker.utils import Calendar, get_date, next_month, prev_month
+from settings.models import Tag
 
 
 def home(request):
@@ -81,16 +82,34 @@ class GroupDeleteView(DeleteView):
         messages.warning(self.request, self.success_message)
         return super(GroupDeleteView, self).delete(request, *args, **kwargs)
 
+
+
+
 class ElementDetailView(DetailView):
     model = Element
 
-class ElementCreateView(SuccessMessageMixin, CreateView):
+class ElementCreateFromListView(SuccessMessageMixin, CreateView):
     model = Element
-    fields = '__all__'
+    fields = [
+        'activity',
+        'code_act_type',
+        'receiver_ccenter',
+        'wbs_element',
+        'receiver_order',
+        'description',
+        'tag'
+    ]
     success_message = 'Element was created'
+
+    def form_valid(self, form):
+        group = Group.objects.get(id=self.kwargs.get('pk_group'))
+        form.instance.group = group
+        return super(ElementCreateFromListView, self).form_valid(form)
 
     def get_success_url(self):
         return reverse('group-detail', kwargs={'pk': self.object.group.id})
+
+
 
 class ElementUpdateView(SuccessMessageMixin, UpdateView):
     model = Element
@@ -112,8 +131,71 @@ class ElementDeleteView(DeleteView):
         return reverse('group-detail', kwargs={'pk': self.object.group.id})
 
 
+
+
+
 class DayDetailView(DetailView):
     model = Day
+
+class DayUpdateView(SuccessMessageMixin, UpdateView):
+    model = Day
+    fields = [
+        'start',
+        'end',
+        'timeout',
+        'is_vacation',
+        'is_public_holiday',
+    ]
+
+    success_message = "Day was updated"
+
+    def get_success_url(self):
+        print(self.object)
+        return reverse('entry-day-update', kwargs={'pk': self.object.date})
+
+class EntryCreateFromDayView(SuccessMessageMixin, CreateView):
+    model = Entry
+    fields = [
+        'element',
+        'duration',
+        'description',
+        'tag'
+    ]
+
+
+    def form_valid(self, form):
+        date = Day.objects.get(date=self.request.GET.get('date'))
+        form.instance.date = date
+        #inherit tag from element if empty and tag exists
+        if not form.instance.tag and form.instance.element.tag_id:
+            form.instance.tag = Tag.objects.get(id=form.instance.element.tag_id)
+        
+        if not form.instance.description:
+            form.instance.description = Element.objects.get(id=form.instance.element_id).description
+
+        return super(EntryCreateFromDayView, self).form_valid(form)
+    
+    def get_success_url(self):
+        return reverse('entry-day-update', kwargs={'pk': self.object.date})
+
+
+class EntryUpdateView(SuccessMessageMixin, UpdateView):
+    model = Entry
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse('entry-day-update', kwargs={'pk': self.object.date})
+
+class EntryDeleteView(SuccessMessageMixin, DeleteView):
+    model = Entry
+
+    success_message = "Entry was deleted"
+    
+    def delete(self, request, *args, **kwargs):
+        messages.warning(self.request, self.success_message)
+        return super(EntryDeleteView, self).delete(request, *args, **kwargs)
+    def get_success_url(self):
+        return reverse('entry-day-update', kwargs={'pk': self.object.date})
 
         
 # class ProjectDetailView(DetailView):

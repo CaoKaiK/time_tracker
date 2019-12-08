@@ -26,16 +26,19 @@
 
                 </li>
                 <li class="nav-item">
-                    {% if "day" in request.resolver_match.url_name%}
+                    {% if "day" in request.resolver_match.url_name %}
                     <a href="#" 
                         class="nav-link active"><i class="fas fa-calendar-day mr-2"></i>Day
+                    </a>
+                    {% elif day %}
+                    <a href="{% url 'entry-day-update' pk=day.date %}" 
+                        class="nav-link card-nav-link"><i class="fas fa-calendar-day mr-2"></i>Day
                     </a>
                     {% else %}
                     <a href="#" 
                         class="nav-link card-nav-link"><i class="fas fa-calendar-day mr-2"></i>Day
                     </a>
                     {% endif %}
-
                 </li>
                 
 

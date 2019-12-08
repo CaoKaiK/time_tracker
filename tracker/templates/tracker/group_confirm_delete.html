@@ -1,10 +1,44 @@
-{% extends "base.html" %}
+{% extends "tracker/group_base.html" %}
 
-{% block content %}
+{% block card-content %}
 
-<form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
-</form>
+<div class="card-body">
+    <form method="post">{% csrf_token %}
+    <div class="card-title">
+        <h4>Delete Group {{ object }}</h4>
+    </div>
+
+    <p class="card-text">
+        You are deleting an Element Group. As an Element Group is parent to elements and elements are parent to entries, you will be deleting all child elements and their child entries.
+    </p>
+    <p class="card-text">
+        <h5>
+            Elements:
+        </h5>
+    </p>
+    {% for element in object.elements.all %}
+    {{ element }}
+    {% endfor %}
+
+    <p class="card-text">
+        <h5>
+            Entries:
+        </h5>
+    </p>
+    {% for entry in object.elements.entries.all %}
+    {{ entry }}
+    {% endfor %}
+    <hr>
+
+    
+        <a href="{% url 'group-detail' pk=object.id %}" class="btn btn-teal"> Cancel </a>
+        <button type="submit" class="btn btn-siemens-yellow-dark"> Delete </button>
+    </form>
+</div>
+    
+
+
+
+
 
 {% endblock %}

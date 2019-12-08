@@ -1,0 +1,115 @@
+{% extends "tracker/calendar_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load filters %}
+
+{% block card-content %}
+
+
+<div class="card-body">
+        <form method="post">{% csrf_token %}
+
+            <h5 class="card-title">{{ day }} 
+                {% if day.is_weekend %}
+                    <span class="badge badge-blue-light ml-3">Weekend</span>
+                {% elif day.is_public_holiday %}
+                    <span class="badge badge-soft-red ml-3">Public Holiday</span>
+                {% elif day.is_vacation %}
+                    <span class="badge badge-siemens-yellow-dark ml-3">Vacation</span>
+                {% endif %}
+            </h5>
+    
+            <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8">
+                                <div class="table-responsive table-sm">   
+                                        <table class="table table-hover mt-3">
+                                            <thead>
+                                                <tr>
+                                                    <td scope="col"></td>
+                                                    <td scope="col"></td>
+                                                    <td scope="col">Comment</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Start Time</td>
+                                                    <td>{{ form.start | as_crispy_field }}</td>
+                                                    <td class="font-weight-light"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End Time</td>
+                                                    <td>{{ form.end | as_crispy_field }}</td>
+                                                    <td class="font-weight-light"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Break Time</td>
+                                                    <td>{{ form.timeout | as_crispy_field }}</td>                                        
+                                                    <td class="font-weight-light"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total Duration</td>
+                                                    <td>{{ day.total_duration | duration }}</td>                                        
+                                                    <td class="font-weight-light">(End Time - Start Time) - Break Time</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Attributed Hours</td>
+                                                    <td>{{ day.entries_sum_duration | duration }}</td>                                        
+                                                    <td class="font-weight-light">Sum of duration for all entries on this day</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td><a href="{% url 'entry-create-day'%}?date={{ day.date | date:"Y-m-d" }}" class="badge badge-light text-muted"><i class="fas fa-plus-square mr-1"></i>Add Entry</a></td>                                        
+                                                    <td class="font-weight-light"></td>
+                                                </tr>
+                                                {% for entry in day.entries.all %}
+                                                <tr>
+                                                    <td class="font-weight-light pl-4"><a href="{% url 'entry-update' pk=entry.id %}" class="card-title-link">{{ entry.element }}</a></td>
+                                                    <td class="font-weight-light">{{ entry.duration | duration }}</td>
+                                                    <td class="font-weight-light"></td>
+                                                </tr>
+                                                {% endfor %}
+                                                <tr>
+                                                    <td>Contractual Hours:</td>
+                                                    <td>{{ day.target | duration }}</td>
+                                                    <td class="font-weight-light">Ajdust in settings for individual months</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hour withdrawal:</td>
+                                                    <td>{{ day.withdrawal | duration }}</td>
+                                                    <td class="font-weight-light">One-time payment of hours</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Balance Day:</td>
+                                                    <td>{{ day.balance_day | duration }}</td>
+                                                    <td class="font-weight-light">(Attributed Hours - Contractual Hours) - Withdrawal </td>
+                                                </tr>
+            
+                                            </tbody>
+                                        </table>
+                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    
+                                    <h5>Day Settings</h5>
+                                </div>
+                                <div class="card-body"> 
+                                    <div class="card-text">
+                                            {{ form.is_public_holiday | as_crispy_field }}
+                                            {{ form.is_vacation | as_crispy_field }}
+                                    </div>
+                                </div>                                
+                            </div>
+                            <button type="submit" class="btn btn-siemens-green mt-4"> Update </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
+
+
+    
+{% endblock card-content %}
