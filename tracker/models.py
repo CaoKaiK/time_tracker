@@ -1,10 +1,8 @@
 from django.db import models
 from django.urls import reverse
-
 from django.db.models import Sum
 
 import datetime
-
 
 from settings.models import User, Contract, Activity, Tag
 

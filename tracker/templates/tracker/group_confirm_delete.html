@@ -19,13 +19,16 @@
     <ul>
     {% for element in object.elements.all %}
         <li>{{ element }}</li>
-        Entries:
-        {% for entry in element.entries.all %}
-        <li>{{ entry }}</li>
-        {% endfor %}
-        <hr>
-
-
+    {% endfor %}
+    </ul>
+    <p class="card-text">
+            <h5>
+                Entries:
+            </h5>
+        </p>
+    <ul>
+    {% for entry in entries.all %}
+    <li>{{ entry }}</li>
     {% endfor %}
     </ul>
 

@@ -78,6 +78,11 @@ class GroupDeleteView(DeleteView):
     success_url = reverse_lazy('group-list')
     success_message = 'Group was deleted'
     
+    def get_context_data(self, *args, **kwargs):
+        context = super(GroupDeleteView, self).get_context_data(*args, **kwargs)
+        context['entries'] = Entry.objects.filter(element__group = self.object.id) # pylint: disable=maybe-no-member
+        return context
+
     def delete(self, request, *args, **kwargs):
         messages.warning(self.request, self.success_message)
         return super(GroupDeleteView, self).delete(request, *args, **kwargs)
