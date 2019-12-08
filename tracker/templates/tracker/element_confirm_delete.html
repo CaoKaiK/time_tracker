@@ -1,10 +1,33 @@
-{% extends "base.html" %}
+{% extends "tracker/element_base.html" %}
 
-{% block content %}
+{% block card-content %}
 
-<form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
-</form>
+<div class="card-body">
+    <form method="post">{% csrf_token %}
+    <div class="card-title">
+        <h4>Delete Element {{ object }}</h4>
+    </div>
 
-{% endblock %}
+    <p class="card-text">
+        You are deleting an Element. As an Element is parent to entries, you will be deleting all child entries.
+    </p>
+
+
+    <p class="card-text">
+        <h5>
+            Entries:
+        </h5>
+    </p>
+    {% for entry in object.entries.all %}
+    {{ entry }}
+    {% endfor %}
+    <hr>
+
+    
+        <a href="{% url 'group-element-detail' pk_group=object.group.id pk=object.id %}" class="btn btn-teal"> Cancel </a>
+        <button type="submit" class="btn btn-siemens-yellow-dark"> Delete </button>
+    </form>
+</div>
+    
+
+{% endblock card-content %}
