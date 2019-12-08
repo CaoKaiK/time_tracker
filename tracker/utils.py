@@ -32,14 +32,24 @@ class Calendar(HTMLCalendar):
 			entry_list += f'<span class="badge badge-secondary m-1"> {entry.element.group} </span>'
 
 		if day != 0:
-			if my_day.is_weekend:
-				return f"""<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-blue-light">{day}</div></a>{entry_list}</ul></div></td>"""
-			elif my_day.is_public_holiday:
-				return f'<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-soft-red">{day}</div></a>{entry_list}</ul></div></td>'
-			elif my_day.is_vacation:
-				return f'<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-siemens-yellow-dark">{day}</div></a>{entry_list}</ul></div></td>'
+			balance_day = int(round(my_day.balance_day.total_seconds() / 3600, 0))
+			if balance_day > 0:
+				balance = f'<span class="balance-pos"><i class="fas fa-caret-square-up fa-fw mr-1"></i>{balance_day}</span>'
+			elif balance_day < 0:
+				balance = f'<span class="balance-neg"><i class="fas fa-caret-square-down fa-fw mr-1"></i>{balance_day}</span>'
 			else:
-				return f'<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-light">{day}</div></a>{entry_list}</ul></div></td>'
+				balance = f'<span class="balance"></span>'
+			
+
+		if day != 0:
+			if my_day.is_weekend:
+				return f"""<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-blue-light">{balance}{day}</div></a>{entry_list}</ul></div></td>"""
+			elif my_day.is_public_holiday:
+				return f'<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-soft-red">{balance}{day}</div></a>{entry_list}</ul></div></td>'
+			elif my_day.is_vacation:
+				return f'<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-siemens-yellow-dark">{balance}{day}</div></a>{entry_list}</ul></div></td>'
+			else:
+				return f'<td><div class="card"><a href="/entry/day/{day_string}"><div class="card-header header-small btn-light">{balance}{day}</div></a>{entry_list}</ul></div></td>'
 
 		return '<td></td>'
 

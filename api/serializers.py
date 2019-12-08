@@ -1,8 +1,10 @@
 from rest_framework import serializers
 
 from settings.models import Activity, Tag
-from tracker.models import Customer, Group, Element, Day
+from tracker.models import Customer, Group, Element, Day, Entry
 
+
+# standard model serializers
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Activity
@@ -28,3 +30,14 @@ class ElementSerializer(serializers.HyperlinkedModelSerializer):
         model = Element
         fields = '__all__'
 
+class DaySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Day
+        fields = '__all__'
+
+class EntrySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Entry
+        fields = '__all__'
+
+# dashboard specific api hooks

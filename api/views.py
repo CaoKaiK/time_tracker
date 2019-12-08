@@ -5,14 +5,16 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 
 from settings.models import Activity, Tag
-from tracker.models import Customer, Group, Element
+from tracker.models import Customer, Group, Element, Entry, Day
 
 from .serializers import (
     ActivitySerializer,
     TagSerializer,
     CustomerSerializer,
     GroupSerializer,
-    ElementSerializer
+    ElementSerializer,
+    DaySerializer,
+    EntrySerializer
     )
 
 
@@ -36,3 +38,11 @@ class GroupViewSet(viewsets.ModelViewSet):
 class ElementViewSet(viewsets.ModelViewSet):
     queryset = Element.objects.all() # pylint: disable=maybe-no-member
     serializer_class = ElementSerializer
+
+class DayViewSet(viewsets.ModelViewSet):
+    queryset = Day.objects.all() # pylint: disable=maybe-no-member
+    serializer_class = DaySerializer
+
+class EntryViewSet(viewsets.ModelViewSet):
+    queryset = Entry.objects.all() # pylint: disable=maybe-no-member
+    serializer_class = EntrySerializer

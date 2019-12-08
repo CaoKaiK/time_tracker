@@ -6,12 +6,12 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a href="#"
+                    <a href="{% url 'dash-flex' %}"
                         class="nav-link {% if "flex" in request.resolver_match.url_name %} active {% else %} card-nav-link {% endif %}">
                         <i class="fas fa-chart-line mr-2"></i>Flextime Account</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link {% if "group" in request.resolver_match.url_name %} active {% else %} card-nav-link {% endif %}">
+                    <a href="{% url 'dash-group' %}" class="nav-link {% if "group" in request.resolver_match.url_name %} active {% else %} card-nav-link {% endif %}">
                         <i class="fas fa-chart-pie mr-2"></i>Element Groups</a>
                 </li>
                 <li class="nav-item">

@@ -7,15 +7,19 @@ from api.views import (
     TagViewSet,
     CustomerViewSet,
     GroupViewSet,
-    ElementViewSet
+    ElementViewSet,
+    EntryViewSet,
+    DayViewSet,
     )
 
 router = routers.DefaultRouter()
 router.register(r'activites', ActivityViewSet)
 router.register(r'tags', TagViewSet)
 router.register(r'customers', CustomerViewSet)
-router.register(r'groups', GroupViewSet)
+router.register(r'group', GroupViewSet)
 router.register(r'elements', ElementViewSet)
+router.register(r'days', DayViewSet)
+router.register(r'entries', EntryViewSet)
 
 
 urlpatterns = [
