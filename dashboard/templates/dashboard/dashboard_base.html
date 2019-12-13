@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 
 <div class="card shadow-sm mb-3">
@@ -26,5 +26,13 @@
 {% endblock card-content%}
 
 </div>
+
+<script src="{% static '/echarts/echarts.all.js' %}"></script>
+
+<script>
+    $(document).ready(function(){
+        {% block jquery %}{% endblock jquery %}
+    })
+</script>
 
 {% endblock content %}

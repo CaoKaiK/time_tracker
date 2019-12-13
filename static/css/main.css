@@ -143,13 +143,13 @@
 }
 
 .balance-pos{
-  background-color: #ffffff;
-  color: #6bcc11;
+  
+  color: #00a716;
   margin-right: 2rem;
 }
 
 .balance-neg{
-  background-color: #ffffff;
+  
   color: #cc1d11;
   margin-right: 2rem;
 }
