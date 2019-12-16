@@ -3,6 +3,7 @@
 
 # echarts
 echarts/
+node_modules/
 
 #venv
 venv/

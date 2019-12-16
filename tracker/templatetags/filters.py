@@ -12,7 +12,7 @@ def hour_minute_format(value):
     minutes = value%60
     return '%s:%02d' % (hours,minutes)
 
-@register.filter
+@register.filter('duration')
 def duration(td):
     total_seconds = int(td.total_seconds())
     if total_seconds < 0:
