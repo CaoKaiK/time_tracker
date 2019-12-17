@@ -12,6 +12,8 @@ from api.views import (
     DayViewSet,
     )
 
+from api.views import TestGroupData, GroupSum
+
 router = routers.DefaultRouter()
 router.register(r'activites', ActivityViewSet)
 router.register(r'tags', TagViewSet)
@@ -22,6 +24,12 @@ router.register(r'days', DayViewSet)
 router.register(r'entries', EntryViewSet)
 
 
+
 urlpatterns = [
     path('', include(router.urls), name='api-v1'),
+    path('chart/', include([
+        path('group-test/', TestGroupData.as_view()),
+        path('group-sum/', GroupSum.as_view()),
+        ]),
+    ),
 ]

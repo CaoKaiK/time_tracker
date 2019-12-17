@@ -2,7 +2,41 @@
 
 <script>
 {% block jquery %}
-    var endpoint = '/api/data/'
+var endpoint = '/api/v1/chart/group-sum'
+var dataset = []
+var labels = []
+var background = []
+var border = []
+
+$.ajax({
+    method: "GET",
+    url: endpoint,
+    success: function(data){
+        console.log(data)
+        var labels = data.names
+        var dataset = data.hours
+        var background = data.background
+        var border = data.border
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Element Group',
+                    data: dataset,
+                    backgroundColor: background,
+                    borderColor: border
+                }],
+            }
+        })
+    },
+    error: function(error_data){
+        console.log(data)
+    }
+})
+
+
 {% endblock jquery %}
 </script>
 
@@ -10,7 +44,7 @@
 
 {% block card-content %}
 
-Test
+<canvas id="myChart" width="200" height="200"></canvas>
 
 
 {% endblock card-content %}
