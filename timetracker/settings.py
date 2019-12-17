@@ -130,6 +130,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = "/var/www/siemenstimetracker.herokuapp.com/static"
 
 
 MEDIA_URL = '/media/'
