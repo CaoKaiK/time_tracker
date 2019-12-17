@@ -100,9 +100,9 @@ class GroupSum(APIView):
         background_colors = []
         border_colors = []
         i = 0
-        for group in Group.objects.all():
+        for group in Group.objects.all(): # pylint: disable=maybe-no-member
             
-            entries = Entry.objects.filter(element__group = group.id)
+            entries = Entry.objects.filter(element__group = group.id) # pylint: disable=maybe-no-member
             if entries:
                 hours_sum = entries.aggregate(Sum('duration'))['duration__sum'].total_seconds()/3600
                 group_names.append(group.group_name)
@@ -136,7 +136,7 @@ class MonthHours(APIView):
         hours_total = []
         i = 0
 
-        for day in Day.objects.filter(date__year=requested_date.year).filter(date__month=requested_date.month):
+        for day in Day.objects.filter(date__year=requested_date.year).filter(date__month=requested_date.month): # pylint: disable=maybe-no-member
             day_label.append(day.date)
             entries = day.entries.all()
             if entries:
@@ -186,5 +186,5 @@ class TestGroupData(APIView):
     permission_classes = []
 
     def get(self, request, format=None):
-        group_names = [group.group_name for group in Group.objects.all()]
+        group_names = [group.group_name for group in Group.objects.all()] # pylint: disable=maybe-no-member
         return Response(group_names)
