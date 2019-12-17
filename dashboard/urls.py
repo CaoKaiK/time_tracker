@@ -1,9 +1,8 @@
 from django.urls import path
 
-from . import views
+from dashboard.views import groupView, flexView
 
 urlpatterns = [
-    path('', views.testView, name='dash-flex'),
-    path('group', views.testView, name='dash-group')
-    
+    path('', flexView, name='dash-flex'),
+    path('group', groupView, name='dash-group')
 ]

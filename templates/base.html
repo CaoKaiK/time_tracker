@@ -62,7 +62,7 @@
                             <span>Time Entries</span>
                         </a>
 
-                        <a class="nav-link {% if "group" in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
+                        <a class="nav-link {% if "group" in request.resolver_match.url_name and "dash" not in request.resolver_match.url_name %} badge-teal-light {% else %} badge-light {% endif %}"
                             href="{% url 'group-list' %}">
                             <i class="fas fa-project-diagram fa-fw mr-2"></i>
                             <span>Element Groups</span>

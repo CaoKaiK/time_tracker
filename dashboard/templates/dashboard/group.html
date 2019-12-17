@@ -17,8 +17,8 @@ $.ajax({
         var dataset = data.hours
         var background = data.background
         var border = data.border
-        var ctx = document.getElementById('myChart');
-        var myChart = new Chart(ctx, {
+        var ctx = document.getElementById('groupPie');
+        var groupPie = new Chart(ctx, {
             type: 'doughnut',
             data: {
                 labels: labels,
@@ -44,7 +44,20 @@ $.ajax({
 
 {% block card-content %}
 
-<canvas id="myChart" width="200" height="200"></canvas>
+    <div class="row">
+        <div class="col-md-4 mt-3 mb-3 vl">
+            Placeholder pick date and or project
+        </div>
+        <div class="col-md-7">
+            <div class="m-4">
+                <canvas id="groupPie" width="100" height="80"></canvas>
+            </div>
+            
+        </div>
+    </div>
+
+
+
 
 
 {% endblock card-content %}

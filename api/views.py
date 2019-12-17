@@ -11,6 +11,8 @@ from rest_framework.response import Response
 
 from settings.models import Activity, Tag
 from tracker.models import Customer, Group, Element, Entry, Day
+from tracker.utils import get_date
+
 
 from .serializers import (
     ActivitySerializer,
@@ -55,18 +57,18 @@ class EntryViewSet(viewsets.ModelViewSet):
 # chart endpoints
 
 DEFAULT_COLORS = [
-    'rgba(0, 100, 110, 0.5)',
-    'rgba(180, 75, 40, 0.5)',
-    'rgba(85, 110, 40, 0.5)',
-    'rgba(100, 25, 70, 0.5)',
-    'rgba(35, 145, 150, 0.5)',
-    'rgba(235, 120, 10, 0.5)',
-    'rgba(135, 150, 40, 0.5)',
-    'rgba(155, 30, 80, 0.5)',
-    'rgba(75, 185, 185, 0.5)',
-    'rgba(255, 185, 0, 0.5)',
-    'rgba(190, 195, 40, 0.5)',
-    'rgba(215, 105, 140, 0.5)'
+    'rgba(0, 100, 110, 0.7)',
+    'rgba(180, 75, 40, 0.7)',
+    'rgba(85, 110, 40, 0.7)',
+    'rgba(100, 25, 70, 0.7)',
+    'rgba(35, 145, 150, 0.7)',
+    'rgba(235, 120, 10, 0.7)',
+    'rgba(135, 150, 40, 0.7)',
+    'rgba(155, 30, 80, 0.7)',
+    'rgba(75, 185, 185, 0.7)',
+    'rgba(255, 185, 0, 0.7)',
+    'rgba(190, 195, 40, 0.7)',
+    'rgba(215, 105, 140, 0.7)'
 ]
 
 DEFAULT_BORDERS = [
@@ -86,9 +88,9 @@ DEFAULT_BORDERS = [
 
 class GroupSum(APIView):
     """
-    Group Sum View
-
+    Sum of entries for all groups
     """
+
     authentication_classes = []
     permission_classes = []
 
@@ -118,7 +120,62 @@ class GroupSum(APIView):
     
         return Response(data)
 
-        
+class MonthHours(APIView):
+    """
+    Target and Reached Hours per Month
+    """
+
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, format=None):
+        requested_date = get_date(request.GET.get('month', None))
+
+        day_label = []
+        hours_target = []
+        hours_total = []
+        i = 0
+
+        for day in Day.objects.filter(date__year=requested_date.year).filter(date__month=requested_date.month):
+            day_label.append(day.date)
+            entries = day.entries.all()
+            if entries:
+                hours_sum = entries.aggregate(Sum('duration'))['duration__sum'].total_seconds()/3600
+            else:
+                hours_sum = 0
+            day_target = day.target.total_seconds()/3600
+
+            if i==0:
+                hours_target.append(day_target)
+                hours_total.append(hours_sum)
+            else:
+                hours_target.append(day_target + hours_target[i-1])
+                hours_total.append(hours_sum + hours_total[i-1])
+            i +=1
+
+            month = hours_total[-1] - hours_target[-1]
+        data = {
+            'date': day_label,
+            'target': hours_target,
+            'total': hours_total,
+            'month': month
+        }
+
+        return Response(data)
+
+class TotalHours(APIView):
+    """
+    Flextime Account - Total Hours until today
+    """
+    
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, format=None):
+
+        return Response(None)
+
+
 
 class TestGroupData(APIView):
     """

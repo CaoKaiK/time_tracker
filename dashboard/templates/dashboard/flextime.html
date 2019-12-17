@@ -1,6 +1,90 @@
 {% extends "dashboard/dashboard_base.html" %}
 
+<script>
+    {% block jquery %}
+    var endpoint = '/api/v1/chart/month-hours?{{ cur_month }}'
+    var target = []
+    var total = []
+    var labels = []
+    
+    $.ajax({
+        method: "GET",
+        url: endpoint,
+        success: function(data){
+            console.log(data)
+            var labels = data.date
+            var target = data.target   
+            var total = data.total         
+            var ctx = document.getElementById('monthLine');
+            var monthLine = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Target Hours',
+                        data: target,
+                        backgroundColor: 'rgba(235, 120, 10, 0.5)',
+                    }, {
+                        label: 'Total Hours',
+                        data: total,
+                        backgroundColor: 'rgba(100, 125, 45, 0.5)',                   
+                    }]
+                }
+            })
+
+            document.getElementById("month").innerHTML = data.month
+            if (data.month > 0) {
+                document.getElementById("month").style.color = "green"
+            } else {
+                document.getElementById("month").style.color = "red"
+            }
+            
+        },
+        error: function(error_data){
+            console.log(data)
+        }
+    })
+    
+    
+    {% endblock jquery %}
+</script>
+
+
 {% block card-content %}
+<div class="row">
+    <div class="col-sm-8">
+        <ul class="nav mt-3">
+            <li class="nav-item ml-3">
+                <a class="btn btn-outline-info" href="?{{ prev_month }}"> Previous Month </a>
+            </li>
+            <li class="nav-item ml-auto mr-3">
+                <a class="btn btn-outline-info ml-auto" href="?{{ next_month }}"> Next Month </a>
+            </li>
+        </ul>
+        <canvas id="monthLine" width="200" height="100"></canvas>
+
+    </div>
+    <div class="col-sm-4">
+        <div class="card card-kpi mx-auto mt-5">
+            <div class="card-header">
+                Total Hours
+            </div>
+            <div class="card-body">
+                <h2 class="text-center"> #TODO </h2>
+            </div>
+        </div>
+
+        <div class="card card-kpi mx-auto mt-5">
+            <div class="card-header">
+                {{ month_name }}
+            </div>
+            <div class="card-body">
+                <h2 class="text-center" id="month"></h2>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 {% endblock card-content %}
